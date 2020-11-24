@@ -11,6 +11,9 @@ trait ParameterListAwareTrait
     */
     public function getParameterList(): ParameterList
     {
+        if (!$this->hasParameterList()) {
+            $this->parameterList = new ParameterList();
+        }
         return $this->parameterList;
     }
 

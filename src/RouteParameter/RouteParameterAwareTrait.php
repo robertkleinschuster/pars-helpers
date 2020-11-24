@@ -14,6 +14,9 @@ trait RouteParameterAwareTrait
      */
     public function getRouteParameter(): RouteParameter
     {
+        if (!$this->hasRouteParameter()) {
+            $this->routeParameter = new RouteParameter();
+        }
         return $this->routeParameter;
     }
 
