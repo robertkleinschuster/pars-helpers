@@ -43,7 +43,7 @@ class ParameterList extends \IteratorIterator implements \Countable, ParamterLis
      */
     public function set(ParameterInterface $parameter): self
     {
-        $this->getInnerIterator()->offsetSet($parameter::getParameterKey(), $parameter);
+        $this->getInnerIterator()->offsetSet($parameter::name(), $parameter);
         return $this;
     }
 

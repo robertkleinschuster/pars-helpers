@@ -177,10 +177,10 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      */
     public function getId(): ParameterInterface
     {
-        if (!$this->getParameterList()->has(IdParameter::getParameterKey())) {
+        if (!$this->getParameterList()->has(IdParameter::name())) {
             $this->getParameterList()->set(new IdParameter());
         }
-        return $this->getParameterList()->get(IdParameter::getParameterKey());
+        return $this->getParameterList()->get(IdParameter::name());
     }
 
     /**
@@ -188,7 +188,7 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      */
     public function resetId()
     {
-        $this->getParameterList()->unset(IdParameter::getParameterKey());
+        $this->getParameterList()->unset(IdParameter::name());
         return $this;
     }
 

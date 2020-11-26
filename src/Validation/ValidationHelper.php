@@ -35,11 +35,16 @@ class ValidationHelper
     }
 
     /**
+     * @param string|null $field
      * @return bool
      */
-    public function hasError(): bool
+    public function hasError(string $field = null): bool
     {
-        return count($this->errorField_Map) > 0;
+        if ($field) {
+            return isset($this->errorField_Map[$field]);
+        } else {
+            return count($this->errorField_Map) > 0;
+        }
     }
 
     /**
@@ -58,6 +63,20 @@ class ValidationHelper
             return $errors;
         } else {
             return $this->errorField_Map[$field] ?? [];
+        }
+    }
+
+    /**
+     * @param string|null $field
+     * @return string
+     */
+    public function getSummary(string $field = null, bool $html = true): string
+    {
+        $errors = $this->getErrorList($field);
+        if ($html) {
+            return implode('<br>', $errors);
+        } else {
+            return implode(PHP_EOL, $errors);
         }
     }
 

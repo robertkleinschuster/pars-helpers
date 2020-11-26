@@ -14,7 +14,7 @@ class OrderParameter extends AbstractParameter
     public const MODE_ASC = 'asc';
     public const MODE_DESC = 'desc';
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'order';
     }

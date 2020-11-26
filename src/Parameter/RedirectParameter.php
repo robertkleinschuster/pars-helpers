@@ -7,7 +7,7 @@ class RedirectParameter extends AbstractParameter
     public const ATTRIBUTE_LINK = 'link';
 
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'redirect';
     }

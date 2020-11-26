@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-namespace Pars\Helper\Helper;
+namespace Pars\Helper\Path;
+
 
 /**
  * Trait PathHelperAwareTrait
@@ -13,10 +14,14 @@ trait PathHelperAwareTrait
     private ?PathHelper $pathHelper = null;
 
     /**
-    * @return PathHelper
-    */
-    public function getPathHelper(): PathHelper
+     * @param bool $reset
+     * @return PathHelper
+     */
+    public function getPathHelper(bool $reset = true): PathHelper
     {
+        if ($reset) {
+            $this->pathHelper->reset();
+        }
         return $this->pathHelper;
     }
 

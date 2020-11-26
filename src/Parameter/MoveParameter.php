@@ -14,7 +14,7 @@ class MoveParameter extends AbstractParameter
     public const ATTRIBUTE_REFERENCE_VALUE = 'referenceValue';
 
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'move';
     }
@@ -28,7 +28,7 @@ class MoveParameter extends AbstractParameter
      */
     public function setSteps(int $steps)
     {
-        $this->setAttribute(self::ATTRIBUTE_STEPS, strval($steps));
+        $this->setAttribute(self::ATTRIBUTE_STEPS, (string)($steps));
         return $this;
     }
 
@@ -38,7 +38,7 @@ class MoveParameter extends AbstractParameter
      */
     public function getSteps(): int
     {
-        return intval($this->getAttribute(self::ATTRIBUTE_STEPS));
+        return (int) $this->getAttribute(self::ATTRIBUTE_STEPS);
     }
 
 
@@ -93,7 +93,7 @@ class MoveParameter extends AbstractParameter
      */
     public function setReferenceValue($referenceValue)
     {
-        $this->setAttribute(self::ATTRIBUTE_REFERENCE_VALUE, strval($referenceValue));
+        $this->setAttribute(self::ATTRIBUTE_REFERENCE_VALUE, (string)($referenceValue));
         return $this;
     }
 

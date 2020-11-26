@@ -9,7 +9,7 @@ class SubmitParameter extends AbstractParameter
     public const MODE_SAVE = 'save';
     public const MODE_DELETE = 'delete';
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'submit';
     }

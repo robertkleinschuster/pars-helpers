@@ -9,7 +9,7 @@ class PaginationParameter extends AbstractParameter
     public const ATTRIBUTE_LIMIT = 'limit';
 
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'pagination';
     }
@@ -23,7 +23,7 @@ class PaginationParameter extends AbstractParameter
      */
     public function setPage(int $page)
     {
-        $this->setAttribute(self::ATTRIBUTE_PAGE, strval($page));
+        $this->setAttribute(self::ATTRIBUTE_PAGE, (string) $page);
         return $this;
     }
 
@@ -35,7 +35,7 @@ class PaginationParameter extends AbstractParameter
      */
     public function setLimit(int $limit)
     {
-        $this->setAttribute(self::ATTRIBUTE_LIMIT, strval($limit));
+        $this->setAttribute(self::ATTRIBUTE_LIMIT, (string) $limit);
         return $this;
     }
 
@@ -45,7 +45,7 @@ class PaginationParameter extends AbstractParameter
      */
     public function getPage(): int
     {
-        return intval($this->getAttribute(self::ATTRIBUTE_PAGE));
+        return (int) $this->getAttribute(self::ATTRIBUTE_PAGE);
     }
 
     /**
@@ -54,6 +54,6 @@ class PaginationParameter extends AbstractParameter
      */
     public function getLimit(): int
     {
-        return intval($this->getAttribute(self::ATTRIBUTE_LIMIT));
+        return (int) $this->getAttribute(self::ATTRIBUTE_LIMIT);
     }
 }

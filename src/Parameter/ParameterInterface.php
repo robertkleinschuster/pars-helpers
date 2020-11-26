@@ -7,13 +7,13 @@ interface ParameterInterface
     /**
      * @return string
      */
-    public static function getParameterKey(): string;
+    public static function name(): string;
 
     /**
      * @param string $attribute
      * @return string
      */
-    public static function getFormKey(string $attribute): string;
+    public static function nameAttr(string $attribute): string;
 
     /**
      * @return string

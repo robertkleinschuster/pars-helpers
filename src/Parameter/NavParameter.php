@@ -11,7 +11,7 @@ class NavParameter extends AbstractParameter
     public const ATTRIBUTE_INDEX = 'index';
     public const ATTRIBUTE_ID = 'id';
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'nav';
     }
@@ -25,7 +25,7 @@ class NavParameter extends AbstractParameter
      */
     public function setIndex(int $index)
     {
-        $this->setAttribute(self::ATTRIBUTE_INDEX, strval($index));
+        $this->setAttribute(self::ATTRIBUTE_INDEX, (string) $index);
         return $this;
     }
 
@@ -35,7 +35,7 @@ class NavParameter extends AbstractParameter
      */
     public function getIndex(): int
     {
-        return intval($this->getAttribute(self::ATTRIBUTE_INDEX));
+        return (int) $this->getAttribute(self::ATTRIBUTE_INDEX);
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pars\Helper\Helper;
+namespace Pars\Helper\Path;
 
 /**
  * Interface PathHelperAwareInterface

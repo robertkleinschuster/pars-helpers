@@ -73,9 +73,9 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
      * @param string $attribute
      * @return string
      */
-    public static function getFormKey(string $attribute): string
+    public static function nameAttr(string $attribute): string
     {
-        return static::getParameterKey() . "[$attribute]";
+        return static::name() . "[$attribute]";
     }
 
 

@@ -69,7 +69,7 @@ class ParameterListTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
          * @var $paremter AbstractParameter
          */
         $paremter = new class () extends AbstractParameter {
-            public static function getParameterKey(): string
+            public static function name(): string
             {
                 return 'test';
             }

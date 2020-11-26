@@ -6,7 +6,7 @@ class SearchParameter extends AbstractParameter
 {
     public const ATTRIBUTE_TEXT = 'text';
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'search';
     }
@@ -17,7 +17,7 @@ class SearchParameter extends AbstractParameter
      */
     public static function getFormKeyText()
     {
-        return self::getFormKey(self::ATTRIBUTE_TEXT);
+        return self::nameAttr(self::ATTRIBUTE_TEXT);
     }
 
     /**

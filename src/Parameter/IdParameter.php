@@ -17,17 +17,11 @@ class IdParameter extends AbstractParameter
         if (null === $value) {
             $value = "{{$field}}";
         }
-        if (is_string($value)) {
-            $this->setAttribute($field, $value);
-        } elseif (is_integer($value)) {
-            $this->setAttribute($field, strval($value));
-        } elseif (is_bool($value)) {
-            $this->setAttribute($field, strval($value));
-        }
+        $this->setAttribute($field, (string) $value);
         return $this;
     }
 
-    public static function getParameterKey(): string
+    public static function name(): string
     {
         return 'id';
     }
