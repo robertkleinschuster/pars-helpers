@@ -68,4 +68,19 @@ class SubmitParameter extends AbstractParameter
         $this->setMode(self::MODE_SAVE);
         return $this;
     }
+
+    public static function createDelete()
+    {
+        return (new static())->setDelete();
+    }
+
+    public static function createSave()
+    {
+        return (new static())->setSave();
+    }
+
+    public static function createCreate()
+    {
+        return (new static())->setCreate();
+    }
 }

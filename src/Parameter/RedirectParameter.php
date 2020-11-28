@@ -4,7 +4,7 @@ namespace Pars\Helper\Parameter;
 
 class RedirectParameter extends AbstractParameter
 {
-    public const ATTRIBUTE_LINK = 'link';
+    public const ATTRIBUTE_PATH = 'path';
 
 
     public static function name(): string
@@ -14,14 +14,14 @@ class RedirectParameter extends AbstractParameter
 
 
     /**
-     * @param string $link
+     * @param string $path
      * @return $this
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public function setLink(string $link)
+    public function setPath(string $path)
     {
-        $this->setAttribute(self::ATTRIBUTE_LINK, urlencode($link));
+        $this->setAttribute(self::ATTRIBUTE_PATH, $path);
         return $this;
     }
 
@@ -29,8 +29,8 @@ class RedirectParameter extends AbstractParameter
      * @return string
      * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
-    public function getLink(): string
+    public function getPath(): string
     {
-        return urldecode($this->getAttribute(self::ATTRIBUTE_LINK));
+        return $this->getAttribute(self::ATTRIBUTE_PATH);
     }
 }

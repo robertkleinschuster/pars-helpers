@@ -13,7 +13,7 @@ class ParameterMapHelper
         $result = [];
         $key_List = explode(';', $parameter);
         foreach ($key_List as $item) {
-            $split = explode('=', $item);
+            $split = explode(':', $item);
             if (empty($split[0]) || empty($split[1])) {
                 throw new InvalidParameterException('Invalid paremter string given.');
             }
@@ -30,7 +30,7 @@ class ParameterMapHelper
     {
         $result = [];
         foreach ($data_Map as $key => $value) {
-            $result[] = "$key=$value";
+            $result[] = "$key:$value";
         }
         return implode(';', $result);
     }
