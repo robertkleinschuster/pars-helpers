@@ -39,6 +39,8 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      */
     private ?string $routeName = null;
 
+    private ?string $fragment = null;
+
     /**
      * Path constructor.
      * @param UrlHelper $urlHelper
@@ -207,6 +209,33 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         $this->getRouteParameter()->setAttribute($key, $value);
         return $this;
     }
+    /**
+    * @return string
+    */
+    public function getFragment(): ?string
+    {
+        return $this->fragment;
+    }
+
+    /**
+    * @param string $fragment
+    *
+    * @return $this
+    */
+    public function setFragment(string $fragment): self
+    {
+        $this->fragment = $fragment;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasFragment(): bool
+    {
+        return isset($this->fragment);
+    }
+
 
     /**
      * @return $this
@@ -233,7 +262,8 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         $path = $this->getUrlHelper()->generate(
             $routeName,
             $this->getRouteParameter()->getAttribute_List(),
-            $this->getParameterList()->toArray()
+            $this->getParameterList()->toArray(),
+            $this->getFragment()
         );
         if ($reset) {
             $this->reset();
