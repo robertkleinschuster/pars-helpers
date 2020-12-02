@@ -243,6 +243,7 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
     public function reset(): self
     {
         $this->routeName = null;
+        $this->fragment = null;
         $this->setRouteParameter(new RouteParameter());
         $this->setParameterList(new ParameterList());
         return $this;
