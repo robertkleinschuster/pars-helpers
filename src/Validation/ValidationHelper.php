@@ -68,6 +68,7 @@ class ValidationHelper
 
     /**
      * @param string|null $field
+     * @param bool $html
      * @return string
      */
     public function getSummary(string $field = null, bool $html = true): string
