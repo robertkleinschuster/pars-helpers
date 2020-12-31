@@ -86,7 +86,7 @@ class AbstractParameterTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
      * @dataProvider dataProvider_invalidParameterString
      * @group unit
      * @small
-     * @covers \Pars\Helper\Parameter\AbstractParameter::fromString
+     * @covers       \Pars\Helper\Parameter\AbstractParameter::fromString
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */

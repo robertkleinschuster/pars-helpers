@@ -26,10 +26,10 @@ trait PathHelperAwareTrait
     }
 
     /**
-    * @param PathHelper $pathHelper
-    *
-    * @return $this
-    */
+     * @param PathHelper $pathHelper
+     *
+     * @return $this
+     */
     public function setPathHelper(PathHelper $pathHelper)
     {
         $this->pathHelper = $pathHelper;
@@ -37,8 +37,8 @@ trait PathHelperAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasPathHelper(): bool
     {
         return $this->pathHelper !== null;

@@ -7,8 +7,8 @@ trait ParameterListAwareTrait
     private ?ParameterList $parameterList = null;
 
     /**
-    * @return ParameterList
-    */
+     * @return ParameterList
+     */
     public function getParameterList(): ParameterList
     {
         if (!$this->hasParameterList()) {
@@ -18,10 +18,10 @@ trait ParameterListAwareTrait
     }
 
     /**
-    * @param ParameterList $parameterList
-    *
-    * @return $this
-    */
+     * @param ParameterList $parameterList
+     *
+     * @return $this
+     */
     public function setParameterList(ParameterList $parameterList)
     {
         $this->parameterList = $parameterList;
@@ -29,8 +29,8 @@ trait ParameterListAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasParameterList(): bool
     {
         return $this->parameterList !== null;

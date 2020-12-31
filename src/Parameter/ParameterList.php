@@ -2,8 +2,6 @@
 
 namespace Pars\Helper\Parameter;
 
-use Traversable;
-
 /**
  * Class ParameterList
  * @package Pars\Helper\Parameter

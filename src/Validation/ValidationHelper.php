@@ -108,6 +108,7 @@ class ValidationHelper
         $this->addErrorFieldMap($validationHelper->getErrorFieldMap());
         return $this;
     }
+
     /**
      * @return string
      */

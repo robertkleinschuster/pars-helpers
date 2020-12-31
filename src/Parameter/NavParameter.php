@@ -25,7 +25,7 @@ class NavParameter extends AbstractParameter
      */
     public function setIndex(int $index)
     {
-        $this->setAttribute(self::ATTRIBUTE_INDEX, (string) $index);
+        $this->setAttribute(self::ATTRIBUTE_INDEX, (string)$index);
         return $this;
     }
 
@@ -35,7 +35,7 @@ class NavParameter extends AbstractParameter
      */
     public function getIndex(): int
     {
-        return (int) $this->getAttribute(self::ATTRIBUTE_INDEX);
+        return (int)$this->getAttribute(self::ATTRIBUTE_INDEX);
     }
 
     /**

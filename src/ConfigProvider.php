@@ -1,8 +1,9 @@
 <?php
+
 namespace Pars\Helper;
 
-use Pars\Helper\Path\PathHelperFactory;
 use Pars\Helper\Path\PathHelper;
+use Pars\Helper\Path\PathHelperFactory;
 
 class ConfigProvider
 {
@@ -19,7 +20,7 @@ class ConfigProvider
             'aliases' => [
             ],
             'factories' => [
-               PathHelper::class => PathHelperFactory::class
+                PathHelper::class => PathHelperFactory::class
             ],
             'delegators' => [
             ],

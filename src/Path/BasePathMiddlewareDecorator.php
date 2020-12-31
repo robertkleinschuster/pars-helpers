@@ -14,7 +14,7 @@ final class BasePathMiddlewareDecorator implements MiddlewareInterface
     /** @var MiddlewareInterface */
     private $middleware;
 
-    /** @var string BasePath name under which the middleware is segregated.  */
+    /** @var string BasePath name under which the middleware is segregated. */
     private $path;
 
     /**

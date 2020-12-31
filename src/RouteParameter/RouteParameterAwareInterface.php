@@ -10,19 +10,19 @@ interface RouteParameterAwareInterface
 {
 
     /**
-    * @return RouteParameter
-    */
+     * @return RouteParameter
+     */
     public function getRouteParameter(): RouteParameter;
 
     /**
-    * @param RouteParameter $routeParameter
-    *
-    * @return $this
-    */
+     * @param RouteParameter $routeParameter
+     *
+     * @return $this
+     */
     public function setRouteParameter(RouteParameter $routeParameter);
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasRouteParameter(): bool;
 }

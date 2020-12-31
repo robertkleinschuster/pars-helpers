@@ -35,7 +35,7 @@ class MoveParameter extends AbstractParameter
      */
     public function getSteps(): int
     {
-        return (int) $this->getAttribute(self::ATTRIBUTE_STEPS);
+        return (int)$this->getAttribute(self::ATTRIBUTE_STEPS);
     }
 
     /**
