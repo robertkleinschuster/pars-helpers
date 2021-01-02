@@ -48,6 +48,15 @@ class ValidationHelper
     }
 
     /**
+     * @param string|null $field
+     * @return bool
+     */
+    public function isValid(string $field = null): bool
+    {
+        return !$this->hasError($field);
+    }
+
+    /**
      * @param string $field
      * @return array
      */

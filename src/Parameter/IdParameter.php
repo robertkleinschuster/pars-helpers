@@ -17,7 +17,7 @@ class IdParameter extends AbstractParameter
         if (null === $value) {
             $value = "{{$field}}";
         }
-        $this->setAttribute($field, (string)$value);
+        $this->setAttribute($field, (string) $value);
         return $this;
     }
 
