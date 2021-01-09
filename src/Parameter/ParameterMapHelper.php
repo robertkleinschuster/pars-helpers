@@ -30,7 +30,11 @@ class ParameterMapHelper
     {
         $result = [];
         foreach ($data_Map as $key => $value) {
-            $result[] = "$key:$value";
+            if (empty($value)) {
+                $result[] = "$key";
+            } else {
+                $result[] = "$key:$value";
+            }
         }
         return implode(';', $result);
     }
