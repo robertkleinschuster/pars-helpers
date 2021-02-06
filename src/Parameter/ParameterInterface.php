@@ -47,4 +47,34 @@ interface ParameterInterface
      * @return bool
      */
     public function hasData(): bool;
+
+    /**
+     * @param string $action
+     * @return $this
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     */
+    public function setAction(string $action);
+
+    /**
+     * @return string
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function getAction(): string;
+    public function hasAction(): bool;
+
+
+    /**
+     * @param string $action
+     * @return $this
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     */
+    public function setController(string $action);
+    /**
+     * @return string
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function getController(): string;
+    public function hasController(): bool;
 }

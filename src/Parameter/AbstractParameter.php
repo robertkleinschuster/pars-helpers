@@ -9,6 +9,9 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
 {
     use AttributeAwareTrait;
 
+    public const ATTRIBUTE_ACTION = 'action';
+    public const ATTRIBUTE_CONTROLLER = 'controller';
+
     /**
      * @var ParameterMapHelper
      */
@@ -102,4 +105,66 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     {
         return count($this->getAttribute_List()) > 0;
     }
+
+
+    /**
+     * @param string $action
+     * @return $this
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     */
+    public function setAction(string $action)
+    {
+        $this->setAttribute(self::ATTRIBUTE_ACTION, $action);
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function getAction(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_ACTION);
+    }
+
+
+    /**
+     * @param string $action
+     * @return $this
+     * @throws \Niceshops\Core\Exception\AttributeExistsException
+     * @throws \Niceshops\Core\Exception\AttributeLockException
+     */
+    public function setController(string $action)
+    {
+        $this->setAttribute(self::ATTRIBUTE_CONTROLLER, $action);
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function getController(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_CONTROLLER);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasAction(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_ACTION);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasController(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_CONTROLLER);
+    }
+
+
 }
