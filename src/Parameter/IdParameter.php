@@ -17,12 +17,36 @@ class IdParameter extends AbstractParameter
         if (null === $value) {
             $value = "{{$field}}";
         }
-        $this->setAttribute($field, (string) $value);
+        $this->setAttribute($field, (string)$value);
+        return $this;
+    }
+
+    /**
+     * @param array $id_Map
+     */
+    public function addId_Map(array $id_Map): self
+    {
+        foreach ($id_Map as $key => $value) {
+            if (is_string($key)) {
+                $this->addId($key, $value);
+            } else {
+                $this->addId($value);
+            }
+        }
         return $this;
     }
 
     public static function name(): string
     {
         return 'id';
+    }
+
+    /**
+     * @param array $id_Map
+     * @return IdParameter
+     */
+    public static function createFromMap(array $id_Map)
+    {
+        return (new static)->addId_Map($id_Map);
     }
 }
