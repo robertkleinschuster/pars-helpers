@@ -6,6 +6,7 @@ namespace Pars\Helper\Path;
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
+use Pars\Helper\Parameter\ContextParameter;
 use Pars\Helper\Parameter\IdParameter;
 use Pars\Helper\Parameter\ParameterInterface;
 use Pars\Helper\Parameter\ParameterList;
@@ -288,5 +289,13 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         return $this->getPath();
     }
 
+
+    /**
+     * @return PathHelper
+     */
+    public function clone(): self
+    {
+        return clone $this;
+    }
 
 }
