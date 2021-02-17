@@ -17,6 +17,7 @@ class Parameter {
 
     fromString(data) {
         let that = this;
+        data = decodeURIComponent(data);
         data.split(';').forEach(function (item) {
             let key = item.split(':')[0];
             let value = item.split(':')[1];
@@ -59,7 +60,6 @@ class PathHelper {
         if (search.length) {
             search = search.substring(1);
             search.split('&').forEach(function (part) {
-                part = decodeURIComponent(part);
                 let name = part.split('=')[0]
                 let paremterStr = part.split('=')[1];
                 if (paremterStr.length) {
