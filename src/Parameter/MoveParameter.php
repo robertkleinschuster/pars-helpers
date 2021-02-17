@@ -2,6 +2,9 @@
 
 namespace Pars\Helper\Parameter;
 
+use Niceshops\Core\Exception\AttributeExistsException;
+use Niceshops\Core\Exception\AttributeLockException;
+
 /**
  * Class MoveParameter
  * @package Pars\Helper\Parameter
@@ -20,8 +23,8 @@ class MoveParameter extends AbstractParameter
     /**
      * @param int $steps
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
     public function setSteps(int $steps)
     {
@@ -41,8 +44,8 @@ class MoveParameter extends AbstractParameter
     /**
      * @param string $referenceValue
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
     public function setReferenceValue($referenceValue)
     {
@@ -61,26 +64,44 @@ class MoveParameter extends AbstractParameter
     }
 
     /**
-     * @param string $field
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
-    public function setUp()
+    public function setUp(): self
     {
         $this->setSteps(-1);
         return $this;
     }
 
     /**
-     * @param string $field
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
-    public function setDown()
+    public function setDown(): self
     {
         $this->setSteps(1);
         return $this;
+    }
+
+    /**
+     * @return MoveParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public static function up(): self
+    {
+        return (new static())->setUp();
+    }
+
+    /**
+     * @return MoveParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public static function down(): self
+    {
+        return (new static)->setDown();
     }
 }

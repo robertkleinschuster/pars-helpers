@@ -4,14 +4,25 @@
 namespace Pars\Helper\Parameter;
 
 
+use Niceshops\Core\Exception\AttributeExistsException;
+use Niceshops\Core\Exception\AttributeLockException;
+use Niceshops\Core\Exception\AttributeNotFoundException;
+
+/**
+ * Class IdListParameter
+ * @package Pars\Helper\Parameter
+ */
 class IdListParameter extends AbstractParameter
 {
 
     /**
      * @param string $field
-     * @param $value
+     * @param null $value
+     * @return IdListParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
-    public function addId(string $field, $value = null)
+    public function addId(string $field, $value = null): self
     {
         if (null === $value) {
             $value = "{{$field}}";
@@ -20,6 +31,30 @@ class IdListParameter extends AbstractParameter
         return $this;
     }
 
+    /**
+     * @param array $id_Map
+     * @return IdListParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public function addId_Map(array $id_Map): self
+    {
+        foreach ($id_Map as $key => $value) {
+            if (is_string($key)) {
+                $this->addId($key, $value);
+            } else {
+                $this->addId($value);
+            }
+        }
+        return $this;
+    }
+
+    /***
+     * @param array|string $data
+     * @return AbstractParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
     public function fromData($data): AbstractParameter
     {
         foreach ($data as $datum) {
@@ -28,6 +63,13 @@ class IdListParameter extends AbstractParameter
         return $this;
     }
 
+    /**
+     * @param array $parameter
+     * @return AbstractParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     * @throws AttributeNotFoundException
+     */
     public function fromArray(array $parameter): AbstractParameter
     {
         foreach ($parameter as $key => $value) {
@@ -39,6 +81,10 @@ class IdListParameter extends AbstractParameter
     }
 
 
+    /**
+     * @param bool $asArr
+     * @return string
+     */
     public static function name(bool $asArr = true): string
     {
         if ($asArr) {
@@ -46,6 +92,17 @@ class IdListParameter extends AbstractParameter
         } else {
             return 'id_list';
         }
+    }
+
+    /**
+     * @param array $id_Map
+     * @return IdListParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public static function fromMap(array $id_Map): self
+    {
+        return (new static())->addId_Map($id_Map);
     }
 
 }

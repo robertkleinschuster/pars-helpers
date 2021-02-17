@@ -113,7 +113,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createDelete()
+    public static function delete()
     {
         return (new static())->setDelete();
     }
@@ -123,7 +123,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createSave()
+    public static function save()
     {
         return (new static())->setSave();
     }
@@ -133,7 +133,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createCreate()
+    public static function create()
     {
         return (new static())->setCreate();
     }
@@ -143,7 +143,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createDeleteBulk()
+    public static function deleteBulk()
     {
         return (new static())->setDeleteBulk();
     }
@@ -153,7 +153,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createSaveBulk()
+    public static function saveBulk()
     {
         return (new static())->setSaveBulk();
     }
@@ -163,7 +163,7 @@ class SubmitParameter extends AbstractParameter
      * @throws \Niceshops\Core\Exception\AttributeExistsException
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
-    public static function createCreateBulk()
+    public static function createBulk()
     {
         return (new static())->setCreateBulk();
     }

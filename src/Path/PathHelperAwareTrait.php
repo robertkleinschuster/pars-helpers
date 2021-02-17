@@ -19,10 +19,11 @@ trait PathHelperAwareTrait
      */
     public function getPathHelper(bool $reset = true): PathHelper
     {
+        $helper = clone $this->pathHelper;
         if ($reset) {
-            $this->pathHelper->reset();
+            $helper->reset();
         }
-        return $this->pathHelper;
+        return $helper;
     }
 
     /**

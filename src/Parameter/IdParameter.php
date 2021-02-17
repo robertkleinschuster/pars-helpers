@@ -45,7 +45,7 @@ class IdParameter extends AbstractParameter
      * @param array $id_Map
      * @return IdParameter
      */
-    public static function createFromMap(array $id_Map)
+    public static function fromMap(array $id_Map)
     {
         return (new static)->addId_Map($id_Map);
     }

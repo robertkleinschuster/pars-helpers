@@ -2,6 +2,10 @@
 
 namespace Pars\Helper\Parameter;
 
+use Niceshops\Core\Exception\AttributeExistsException;
+use Niceshops\Core\Exception\AttributeLockException;
+use Niceshops\Core\Exception\AttributeNotFoundException;
+
 class RedirectParameter extends AbstractParameter
 {
     public const ATTRIBUTE_PATH = 'path';
@@ -16,8 +20,8 @@ class RedirectParameter extends AbstractParameter
     /**
      * @param string $path
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
      */
     public function setPath(string $path)
     {
@@ -27,10 +31,21 @@ class RedirectParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws AttributeNotFoundException
      */
     public function getPath(): string
     {
         return $this->getAttribute(self::ATTRIBUTE_PATH);
+    }
+
+    /**
+     * @param string $path
+     * @return RedirectParameter
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public static function fromPath(string $path): self
+    {
+        return (new static())->setPath($path);
     }
 }
