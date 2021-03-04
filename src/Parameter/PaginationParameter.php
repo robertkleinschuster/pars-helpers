@@ -73,4 +73,20 @@ class PaginationParameter extends AbstractParameter
     {
         return (int)$this->getAttribute(self::ATTRIBUTE_LIMIT);
     }
+
+    /**
+     * @return bool
+     */
+    public function hasLimit(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_LIMIT);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPage(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_PAGE);
+    }
 }
