@@ -14,10 +14,9 @@ class ParameterMapHelper
         $key_List = explode(';', $parameter);
         foreach ($key_List as $item) {
             $split = explode(':', $item);
-            if (empty($split[0]) || empty($split[1])) {
-                throw new InvalidParameterException('Invalid paremter string given.');
+            if (!empty($split[0]) && !empty($split[1])) {
+                $result[$split[0]] = $split[1];
             }
-            $result[$split[0]] = $split[1];
         }
         return $result;
     }

@@ -40,4 +40,12 @@ class SearchParameter extends AbstractParameter
     {
         return $this->getAttribute(self::ATTRIBUTE_TEXT);
     }
+
+    /**
+     * @return bool
+     */
+    public function hasText(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_TEXT);
+    }
 }
