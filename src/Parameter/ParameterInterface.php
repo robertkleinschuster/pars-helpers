@@ -71,10 +71,21 @@ interface ParameterInterface
      * @throws \Niceshops\Core\Exception\AttributeLockException
      */
     public function setController(string $action);
+
     /**
      * @return string
      * @throws \Niceshops\Core\Exception\AttributeNotFoundException
      */
     public function getController(): string;
+
+    /**
+     * @return bool
+     */
     public function hasController(): bool;
+
+    /**
+     * @return $this
+     */
+    public function clear(): self;
+
 }

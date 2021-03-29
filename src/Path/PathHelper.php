@@ -7,6 +7,7 @@ namespace Pars\Helper\Path;
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
 use Pars\Helper\Parameter\ContextParameter;
+use Pars\Helper\Parameter\FilterParameter;
 use Pars\Helper\Parameter\IdParameter;
 use Pars\Helper\Parameter\ParameterInterface;
 use Pars\Helper\Parameter\ParameterList;
@@ -185,6 +186,17 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
             $this->getParameterList()->set(new IdParameter());
         }
         return $this->getParameterList()->get(IdParameter::name());
+    }
+
+    /**
+     * @return FilterParameter
+     */
+    public function getFilter(): ParameterInterface
+    {
+        if (!$this->getParameterList()->has(FilterParameter::name())) {
+            $this->getParameterList()->set(new FilterParameter());
+        }
+        return $this->getParameterList()->get(FilterParameter::name());
     }
 
     /**

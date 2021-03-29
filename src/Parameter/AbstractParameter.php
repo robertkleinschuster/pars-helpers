@@ -166,5 +166,14 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
         return $this->hasAttribute(self::ATTRIBUTE_CONTROLLER);
     }
 
-
+    /**
+     * @return $this
+     */
+    public function clear(): self
+    {
+        foreach ($this->getAttributes() as $key => $value) {
+            $this->unsetAttribute($key);
+        }
+        return $this;
+    }
 }
