@@ -41,6 +41,15 @@ class OrderParameter extends AbstractParameter
     }
 
     /**
+     * @return bool
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function hasMode(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_MODE);
+    }
+
+    /**
      * @param string $field
      * @return $this
      * @throws \Niceshops\Core\Exception\AttributeExistsException
@@ -59,6 +68,15 @@ class OrderParameter extends AbstractParameter
     public function getField(): string
     {
         return $this->getAttribute(self::ATTRIBUTE_FIELD);
+    }
+
+    /**
+     * @return bool
+     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     */
+    public function hasField(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_FIELD);
     }
 
     /**

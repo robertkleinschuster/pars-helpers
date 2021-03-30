@@ -9,10 +9,12 @@ use Mezzio\Helper\UrlHelper;
 use Pars\Helper\Parameter\ContextParameter;
 use Pars\Helper\Parameter\FilterParameter;
 use Pars\Helper\Parameter\IdParameter;
+use Pars\Helper\Parameter\OrderParameter;
 use Pars\Helper\Parameter\ParameterInterface;
 use Pars\Helper\Parameter\ParameterList;
 use Pars\Helper\Parameter\ParameterListAwareInterface;
 use Pars\Helper\Parameter\ParameterListAwareTrait;
+use Pars\Helper\Parameter\SearchParameter;
 use Pars\Helper\RouteParameter\RouteParameter;
 use Pars\Helper\RouteParameter\RouteParameterAwareInterface;
 use Pars\Helper\RouteParameter\RouteParameterAwareTrait;
@@ -197,6 +199,28 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
             $this->getParameterList()->set(new FilterParameter());
         }
         return $this->getParameterList()->get(FilterParameter::name());
+    }
+
+    /**
+     * @return FilterParameter
+     */
+    public function getSearch(): ParameterInterface
+    {
+        if (!$this->getParameterList()->has(SearchParameter::name())) {
+            $this->getParameterList()->set(new SearchParameter());
+        }
+        return $this->getParameterList()->get(SearchParameter::name());
+    }
+
+    /**
+     * @return FilterParameter
+     */
+    public function getOrder(): ParameterInterface
+    {
+        if (!$this->getParameterList()->has(OrderParameter::name())) {
+            $this->getParameterList()->set(new OrderParameter());
+        }
+        return $this->getParameterList()->get(OrderParameter::name());
     }
 
     /**
