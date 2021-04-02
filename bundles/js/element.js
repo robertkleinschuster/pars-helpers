@@ -189,3 +189,4 @@ class ElementHelper {
 window.element = element = window.el = el = function (element) {
     return new ElementHelper(element);
 }
+

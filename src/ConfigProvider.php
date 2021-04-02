@@ -20,7 +20,7 @@ class ConfigProvider
                         'output' => "helper.js",
                         'sources' => [
                             __DIR__ . '/../bundles/js/_closest.polyfill.js',
-                            __DIR__ . '/../bundles/js/element.js',
+                            #__DIR__ . '/../bundles/js/element.js',
                             __DIR__ . '/../bundles/js/path.js',
                         ]
                     ]
