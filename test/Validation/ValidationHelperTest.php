@@ -14,9 +14,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Niceshops\Bean
+ * @package Pars\Bean
  */
-class ValidationHelperTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
+class ValidationHelperTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 

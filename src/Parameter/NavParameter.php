@@ -20,8 +20,8 @@ class NavParameter extends AbstractParameter
     /**
      * @param int $index
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setIndex(int $index)
     {
@@ -31,7 +31,7 @@ class NavParameter extends AbstractParameter
 
     /**
      * @return int
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getIndex(): int
     {
@@ -41,8 +41,8 @@ class NavParameter extends AbstractParameter
     /**
      * @param string $id
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setId(string $id)
     {
@@ -52,7 +52,7 @@ class NavParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getId(): string
     {

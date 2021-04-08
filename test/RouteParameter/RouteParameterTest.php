@@ -14,9 +14,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Niceshops\Bean
+ * @package Pars\Bean
  */
-class RouteParameterTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
+class RouteParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 

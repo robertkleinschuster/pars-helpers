@@ -12,8 +12,8 @@ class PaginationParameter extends AbstractParameter
      * PaginationParameter constructor.
      * @param int|null $page
      * @param int|null $limit
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function __construct(int $page = null, int $limit = null)
     {
@@ -35,8 +35,8 @@ class PaginationParameter extends AbstractParameter
     /**
      * @param int $page
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setPage(int $page)
     {
@@ -46,7 +46,7 @@ class PaginationParameter extends AbstractParameter
 
     /**
      * @return int
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getPage(): int
     {
@@ -56,8 +56,8 @@ class PaginationParameter extends AbstractParameter
     /**
      * @param int $limit
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setLimit(int $limit)
     {
@@ -67,7 +67,7 @@ class PaginationParameter extends AbstractParameter
 
     /**
      * @return int
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getLimit(): int
     {

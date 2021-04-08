@@ -15,9 +15,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Niceshops\Bean
+ * @package Pars\Bean
  */
-class ParameterListTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
+class ParameterListTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 

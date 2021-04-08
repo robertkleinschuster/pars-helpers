@@ -15,9 +15,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Niceshops\Bean
+ * @package Pars\Bean
  */
-class AbstractParameterTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
+class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 
@@ -61,9 +61,9 @@ class AbstractParameterTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
      * @group unit
      * @small
      * @covers \Pars\Helper\Parameter\AbstractParameter::fromString
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function testFromString()
     {
@@ -87,8 +87,8 @@ class AbstractParameterTest extends \Niceshops\Core\PHPUnit\DefaultTestCase
      * @group unit
      * @small
      * @covers       \Pars\Helper\Parameter\AbstractParameter::fromString
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function testFromString_InvalidString($parameter)
     {

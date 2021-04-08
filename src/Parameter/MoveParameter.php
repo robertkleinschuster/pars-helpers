@@ -2,8 +2,8 @@
 
 namespace Pars\Helper\Parameter;
 
-use Niceshops\Core\Exception\AttributeExistsException;
-use Niceshops\Core\Exception\AttributeLockException;
+use Pars\Pattern\Exception\AttributeExistsException;
+use Pars\Pattern\Exception\AttributeLockException;
 
 /**
  * Class MoveParameter
@@ -34,7 +34,7 @@ class MoveParameter extends AbstractParameter
 
     /**
      * @return int
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getSteps(): int
     {
@@ -55,7 +55,7 @@ class MoveParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getReferenceValue(): ?string
     {

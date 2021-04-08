@@ -2,8 +2,8 @@
 
 namespace Pars\Helper\Parameter;
 
-use Niceshops\Core\Attribute\AttributeAwareInterface;
-use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Pars\Pattern\Attribute\AttributeAwareInterface;
+use Pars\Pattern\Attribute\AttributeAwareTrait;
 
 abstract class AbstractParameter implements ParameterInterface, AttributeAwareInterface
 {
@@ -31,8 +31,8 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     /**
      * @param string $parameter
      * @return AbstractParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function fromString(string $parameter): self
     {
@@ -44,8 +44,8 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     /**
      * @param array $parameter
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function fromArray(array $parameter): self
     {
@@ -57,8 +57,8 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
 
     /**
      * @param $data
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function fromData($data): self
     {
@@ -110,8 +110,8 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     /**
      * @param string $action
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setAction(string $action)
     {
@@ -121,7 +121,7 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getAction(): string
     {
@@ -132,8 +132,8 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     /**
      * @param string $action
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setController(string $action)
     {
@@ -143,7 +143,7 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getController(): string
     {

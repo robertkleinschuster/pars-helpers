@@ -11,8 +11,8 @@ class EditLocaleParameter extends AbstractParameter
     /**
      * Parameter constructor.
      * @param string $value
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function __construct(string $value)
     {

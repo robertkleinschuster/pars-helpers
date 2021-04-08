@@ -24,8 +24,8 @@ class SubmitParameter extends AbstractParameter
     /**
      * @param string $mode
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setMode(string $mode)
     {
@@ -35,7 +35,7 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getMode(): string
     {
@@ -44,8 +44,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setCreate()
     {
@@ -55,8 +55,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setDelete()
     {
@@ -66,8 +66,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setSave()
     {
@@ -77,8 +77,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setCreateBulk()
     {
@@ -88,8 +88,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setDeleteBulk()
     {
@@ -99,8 +99,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setSaveBulk()
     {
@@ -110,8 +110,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function delete()
     {
@@ -120,8 +120,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function save()
     {
@@ -130,8 +130,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function create()
     {
@@ -140,8 +140,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function deleteBulk()
     {
@@ -150,8 +150,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function saveBulk()
     {
@@ -160,8 +160,8 @@ class SubmitParameter extends AbstractParameter
 
     /**
      * @return SubmitParameter
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public static function createBulk()
     {

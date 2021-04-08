@@ -23,8 +23,8 @@ class SearchParameter extends AbstractParameter
     /**
      * @param string $text
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setText(string $text)
     {
@@ -34,7 +34,7 @@ class SearchParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getText(): string
     {

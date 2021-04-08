@@ -4,8 +4,8 @@
 namespace Pars\Helper\Placeholder;
 
 
-use Niceshops\Bean\Converter\ConverterBeanDecorator;
-use Niceshops\Bean\Type\Base\BeanInterface;
+use Pars\Bean\Converter\ConverterBeanDecorator;
+use Pars\Bean\Type\Base\BeanInterface;
 
 class PlaceholderHelper
 {

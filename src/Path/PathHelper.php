@@ -236,8 +236,8 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      * @param string $key
      * @param string $value
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function addRouteParameter(string $key, string $value)
     {

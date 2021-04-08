@@ -2,8 +2,8 @@
 
 namespace Pars\Helper\RouteParameter;
 
-use Niceshops\Core\Attribute\AttributeAwareInterface;
-use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Pars\Pattern\Attribute\AttributeAwareInterface;
+use Pars\Pattern\Attribute\AttributeAwareTrait;
 
 class RouteParameter implements AttributeAwareInterface
 {
@@ -15,8 +15,8 @@ class RouteParameter implements AttributeAwareInterface
     /**
      * @param string $value
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setAction(string $value): self
     {
@@ -27,8 +27,8 @@ class RouteParameter implements AttributeAwareInterface
     /**
      * @param string $value
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setController(string $value): self
     {
@@ -38,7 +38,7 @@ class RouteParameter implements AttributeAwareInterface
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getAction(): string
     {
@@ -47,7 +47,7 @@ class RouteParameter implements AttributeAwareInterface
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getController(): string
     {

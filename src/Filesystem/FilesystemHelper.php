@@ -4,7 +4,7 @@
 namespace Pars\Helper\Filesystem;
 
 
-use Niceshops\Core\Exception\CoreException;
+use Pars\Pattern\Exception\CoreException;
 
 class FilesystemHelper
 {

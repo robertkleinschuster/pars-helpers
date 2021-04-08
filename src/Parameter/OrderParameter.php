@@ -22,8 +22,8 @@ class OrderParameter extends AbstractParameter
     /**
      * @param string $mode
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setMode(string $mode)
     {
@@ -33,7 +33,7 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getMode(): string
     {
@@ -42,7 +42,7 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return bool
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function hasMode(): bool
     {
@@ -52,8 +52,8 @@ class OrderParameter extends AbstractParameter
     /**
      * @param string $field
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setField(string $field)
     {
@@ -63,7 +63,7 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return string
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function getField(): string
     {
@@ -72,7 +72,7 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return bool
-     * @throws \Niceshops\Core\Exception\AttributeNotFoundException
+     * @throws \Pars\Pattern\Exception\AttributeNotFoundException
      */
     public function hasField(): bool
     {
@@ -81,8 +81,8 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setAscending()
     {
@@ -92,8 +92,8 @@ class OrderParameter extends AbstractParameter
 
     /**
      * @return $this
-     * @throws \Niceshops\Core\Exception\AttributeExistsException
-     * @throws \Niceshops\Core\Exception\AttributeLockException
+     * @throws \Pars\Pattern\Exception\AttributeExistsException
+     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function setDescending()
     {
