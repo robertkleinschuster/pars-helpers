@@ -67,7 +67,7 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
      */
     public function testFromString()
     {
-        $this->object->fromString("foo=bar;bar=baz");
+        $this->object->fromString("foo:bar;bar:baz");
         $this->assertEquals('bar', $this->object->getAttribute('foo'));
         $this->assertEquals('baz', $this->object->getAttribute('bar'));
     }
@@ -77,9 +77,9 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
         yield ['invalid'];
         yield [''];
         yield [' '];
-        yield ['invalid='];
+        yield ['invalid:'];
         yield ['invalid;'];
-        yield ['=invalid'];
+        yield [':invalid'];
     }
 
     /**
@@ -87,13 +87,11 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
      * @group unit
      * @small
      * @covers       \Pars\Helper\Parameter\AbstractParameter::fromString
-     * @throws \Pars\Pattern\Exception\AttributeExistsException
-     * @throws \Pars\Pattern\Exception\AttributeLockException
      */
     public function testFromString_InvalidString($parameter)
     {
-        $this->expectException(InvalidParameterException::class);
         $this->object->fromString($parameter);
+        $this->assertEquals([], $this->object->getAttributes());
     }
 
 
@@ -119,7 +117,7 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
      */
     public function testFromData()
     {
-        $this->object->fromData('bla=blub');
+        $this->object->fromData('bla:blub');
         $this->object->fromData(['a' => 'b']);
         $this->assertEquals('blub', $this->object->getAttribute('bla'));
         $this->assertEquals('b', $this->object->getAttribute('a'));
@@ -133,9 +131,9 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
     public function testToString()
     {
         $this->object = $this->getMockBuilder(AbstractParameter::class)->disableOriginalConstructor()->getMockForAbstractClass();
-        $this->object->fromData('bla=blub');
+        $this->object->fromData('bla:blub');
         $this->object->fromData(['a' => 'b']);
-        $this->assertEquals('bla=blub;a=b', $this->object->toString());
+        $this->assertEquals('bla:blub;a:b', $this->object->toString());
     }
 
 
@@ -148,7 +146,7 @@ class AbstractParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
     {
         $this->object = $this->getMockBuilder(AbstractParameter::class)->disableOriginalConstructor()->getMockForAbstractClass();
         $this->assertFalse($this->object->hasData());
-        $this->object->fromData('bla=blub');
+        $this->object->fromData('bla:blub');
         $this->assertTrue($this->object->hasData());
     }
 }
