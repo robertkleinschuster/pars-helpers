@@ -1,7 +1,7 @@
 # pars-helpers
 
-[![Build Status](https://travis-ci.com/robertkleinschuster/pars-helpers.svg?branch=master)](https://travis-ci.com/robertkleinschuster/pars-helpers)
-[![Coverage Status](https://coveralls.io/repos/github/robertkleinschuster/pars-helpers/badge.svg?branch=master)](https://coveralls.io/github/robertkleinschuster/pars-helpers?branch=master)
+[![Build Status](https://travis-ci.com/pars-framework/pars-helpers.svg?branch=master)](https://travis-ci.com/pars-framework/pars-helpers)
+[![Coverage Status](https://coveralls.io/repos/github/pars-framework/pars-helpers/badge.svg?branch=master)](https://coveralls.io/github/pars-framework/pars-helpers?branch=master)
 
 This library provides helpers for pars.
 
