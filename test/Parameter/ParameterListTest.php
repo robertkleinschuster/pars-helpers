@@ -82,6 +82,11 @@ class ParameterListTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
          * @var $paremter AbstractParameter
          */
         $paremter = new class () extends AbstractParameter {
+            public static function name(): string
+            {
+                return 'test';
+            }
+
             public static function getParameterKey(): string
             {
                 return 'test2';
