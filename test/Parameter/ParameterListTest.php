@@ -76,7 +76,7 @@ class ParameterListTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
         };
         $this->object->set($paremter);
         $paremter = clone $paremter;
-        $paremter->fromData('foo=bar;bla=blub');
+        $paremter->fromData('foo:bar;bla:blub');
         $this->object->set($paremter);
         /**
          * @var $paremter AbstractParameter
@@ -84,20 +84,15 @@ class ParameterListTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
         $paremter = new class () extends AbstractParameter {
             public static function name(): string
             {
-                return 'test';
-            }
-
-            public static function getParameterKey(): string
-            {
                 return 'test2';
             }
         };
-        $paremter->fromData('bar=baz');
+        $paremter->fromData('bar:baz');
         $this->object->set($paremter);
-        $this->assertEquals(['test' => 'foo=bar;bla=blub', 'test2' => 'bar=baz'], $this->object->toArray());
-        $this->assertEquals('foo=bar;bla=blub', $this->object->get('test')->toString());
-        $this->assertEquals('bar=baz', $this->object->get('test2')->toString());
+        $this->assertEquals(['test' => 'foo:bar;bla:blub', 'test2' => 'bar:baz'], $this->object->toArray());
+        $this->assertEquals('foo:bar;bla:blub', $this->object->get('test')->toString());
+        $this->assertEquals('bar:baz', $this->object->get('test2')->toString());
         $this->object->unset('test2');
-        $this->assertEquals(['test' => 'foo=bar;bla=blub'], $this->object->toArray());
+        $this->assertEquals(['test' => 'foo:bar;bla:blub'], $this->object->toArray());
     }
 }
