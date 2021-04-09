@@ -39,6 +39,15 @@ class RedirectParameter extends AbstractParameter
     }
 
     /**
+     * @return bool
+     * @throws AttributeNotFoundException
+     */
+    public function hasPath(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_PATH);
+    }
+
+    /**
      * @param string $path
      * @return RedirectParameter
      * @throws AttributeExistsException
