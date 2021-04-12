@@ -10,6 +10,9 @@ namespace Pars\Helper\Validation;
  */
 class ValidationHelper
 {
+
+    public const FIELD_GENERAL_ERROR = 'general_error';
+
     /**
      * @var string[]
      */
@@ -32,6 +35,15 @@ class ValidationHelper
     {
         $this->errorField_Map[$field][] = $error;
         return $this;
+    }
+
+    /**
+     * @param string $error
+     * @return $this
+     */
+    public function addGeneralError(string $error): self
+    {
+        return $this->addError(self::FIELD_GENERAL_ERROR, $error);
     }
 
     /**
