@@ -16,12 +16,37 @@ class PlaceholderHelper
      */
     public function replacePlaceholder(string $str, BeanInterface $bean): string
     {
-        $matches = [];
-        preg_match_all('/\{.*?\}|%7B.*?%7D|%257B.*?%257D/', $str, $matches);
+        $matches = self::findPlaceholder($str);
         $keys = [];
         $values = [];
         $this->replacePlaceholderValues($matches, $str, $bean, $keys, $values);
         return str_replace($keys, $values, $str);
+    }
+
+    /**
+     * @param string $str
+     * @return array
+     */
+    public static function findPlaceholder(string $str): array
+    {
+        $matches = [];
+        preg_match_all('/\{.*?\}|%7B.*?%7D|%257B.*?%257D/', $str, $matches);
+        return $matches;
+    }
+
+    /**
+     * @param string $str
+     * @return array
+     */
+    public static function findPlaceholderResolved(string $str): array
+    {
+        $result = [];
+        $placeholders = self::findPlaceholder($str);
+        $it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($placeholders));
+        foreach ($it as $key => $value) {
+            $result[$key] = $value;
+        }
+        return $result;
     }
 
     /**
