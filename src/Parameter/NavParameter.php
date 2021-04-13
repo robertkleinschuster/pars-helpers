@@ -39,6 +39,14 @@ class NavParameter extends AbstractParameter
     }
 
     /**
+     * @return bool
+     */
+    public function hasIndex(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_INDEX);
+    }
+
+    /**
      * @param string $id
      * @return $this
      * @throws \Pars\Pattern\Exception\AttributeExistsException
@@ -48,6 +56,14 @@ class NavParameter extends AbstractParameter
     {
         $this->setAttribute(self::ATTRIBUTE_ID, $id);
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasId(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_ID);
     }
 
     /**
