@@ -16,12 +16,20 @@ class ConfigProvider
             'bundles' => [
                 'list' => [
                     [
+                        'type' => 'js-sw',
+                        'output' => "helper-sw.js",
+                        'sources' => [
+                            __DIR__ . '/../bundles/js/sw.js',
+                        ]
+                    ],
+                    [
                         'type' => 'js',
                         'output' => "helper.js",
                         'sources' => [
                             __DIR__ . '/../bundles/js/_closest.polyfill.js',
+                            __DIR__ . '/../bundles/js/main.js',
                             #__DIR__ . '/../bundles/js/element.js',
-                            __DIR__ . '/../bundles/js/path.js',
+                            #__DIR__ . '/../bundles/js/path.js',
                         ]
                     ]
                 ]
