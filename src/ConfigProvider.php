@@ -29,7 +29,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/_closest.polyfill.js',
                             __DIR__ . '/../bundles/js/main.js',
                             #__DIR__ . '/../bundles/js/element.js',
-                            #__DIR__ . '/../bundles/js/path.js',
+                            __DIR__ . '/../bundles/js/path.js',
                         ]
                     ]
                 ]
