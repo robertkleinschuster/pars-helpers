@@ -54,15 +54,13 @@ function triggerEvent(event) {
         case EVENT_TYPE_MODAL:
             return triggerModal(event);
     }
-
 }
 
 function eventFetch(url, options) {
-    fetch(url, options).then(response => {
-        return response.headers.get('Content-Type') === 'application/json' ? response.json() : response.text()
-    }).then(data => {
-        fetchEvent(data);
-    }).catch(err => console.error(err));
+    fetch(url, options)
+        .then(response => response.headers.get('Content-Type') === 'application/json' ? response.json() : response.text())
+        .then(data => fetchEvent(data))
+        .catch(err => console.error(err))
 }
 
 function triggerSubmit(event) {
@@ -125,8 +123,7 @@ function handleEvent(data) {
     return data;
 }
 
-function handleSubmit(data)
-{
+function handleSubmit(data) {
     return data;
 }
 
