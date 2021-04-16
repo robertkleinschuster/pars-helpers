@@ -1,17 +1,8 @@
-document.addEventListener("DOMContentLoaded", () => {
-   /* document.querySelectorAll('.service-worker').forEach(element => {
-        let file = element.dataset.src;
-        navigator.serviceWorker.register(file, {scope: '/'})
-            .then(reg => reg.update())
-            .catch(error => console.log('SW: ' + error));
-    });
-    navigator.serviceWorker.addEventListener('message', event => {
-        if (event.data.type === 'fetch') {
-            fetchEvent(event);
-        }
-    });*/
-    initEventListener();
-});
+document.addEventListener("DOMContentLoaded", () => initEventListeners());
+
+const events = {
+    "click": clickEvent
+};
 
 function showOverlay() {
     if (document.querySelectorAll('.ajax-overlay').length === 0) {
@@ -30,18 +21,16 @@ function hideOverlay() {
     document.querySelectorAll('.ajax-overlay').forEach(element => element.classList.remove('show'));
 }
 
-function initEventListener() {
-    document.querySelectorAll('[data-event]').forEach(element => {
-        element.addEventListener('click', clickEvent);
-    });
+function initEventListeners() {
+    document.querySelectorAll('[data-event]').forEach(element =>
+        events.forEach((name, callback) => element.addEventListener(name, callback)));
 }
-/*
-function removeEventListener() {
-    document.querySelectorAll('[data-event]').forEach(element => {
-        element.removeEventListener('click', clickEvent);
-    });
+
+function removeEventListeners() {
+    document.querySelectorAll('[data-event]').forEach(element =>
+        events.forEach((name, callback) => element.removeEventListener(name, callback)));
 }
-*/
+
 function clickEvent(event) {
     event.preventDefault();
     showOverlay();
@@ -52,7 +41,7 @@ function fetchEvent(data) {
     data = handleEvent(data);
     handleAttributes(data);
     inject(data);
-    initEventListener();
+    initEventListeners();
     hideOverlay();
 }
 
