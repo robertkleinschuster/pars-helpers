@@ -4,7 +4,7 @@
  */
 if (window.Element && !Element.prototype.closest) {
 	Element.prototype.closest = function(s) {
-		var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+		let matches = (this.document || this.ownerDocument).querySelectorAll(s),
 			i,
 			el = this;
 		do {

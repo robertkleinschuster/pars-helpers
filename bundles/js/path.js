@@ -7,7 +7,7 @@ class Parameter {
         this.name = name;
     }
 
-    setAtttribute(key, value = '') {
+    setAttributes(key, value = '') {
         this.attributes.push({
             key: key,
             value: value
@@ -18,13 +18,13 @@ class Parameter {
     fromString(data) {
         let that = this;
         data = decodeURIComponent(data);
-        data.split(';').forEach(function (item) {
+        data.split(';').forEach(item => {
             let key = item.split(':')[0];
             let value = item.split(':')[1];
             if (typeof value !== 'undefined' && value.length) {
-                that.setAtttribute(key, value);
+                that.setAttributes(key, value);
             } else {
-                that.setAtttribute(key);
+                that.setAttributes(key);
             }
         });
         return this;
@@ -33,7 +33,7 @@ class Parameter {
     toString() {
         let str = '';
         let length = this.attributes.length;
-        this.attributes.forEach(function (item, index) {
+        this.attributes.forEach((item, index) => {
                 if (item.value.length) {
                     str += item.key + ':' + item.value;
                     if (index <= length - 2) {
@@ -59,29 +59,27 @@ class PathHelper {
         let search = window.location.search;
         if (search.length) {
             search = search.substring(1);
-            search.split('&').forEach(function (part) {
+            search.split('&').forEach(part => {
                 let name = part.split('=')[0]
-                let paremterStr = part.split('=')[1];
-                if (paremterStr.length) {
+                let parameterStr = part.split('=')[1];
+                if (parameterStr.length) {
                     let param = new Parameter(name);
-                    param.fromString(paremterStr);
+                    param.fromString(parameterStr);
                     that.parameters.push(param);
                 }
             });
         }
     }
 
-    addParamter(paramter) {
-        this.parameters = this.parameters.filter(function (item, index) {
-            return item.name !== paramter.name;
-        });
-        this.parameters.push(paramter);
+    addParameter(parameter) {
+        this.parameters = this.parameters.filter(item => item.name !== parameter.name);
+        this.parameters.push(parameter);
     }
 
     getPath() {
         let str = '?';
         let length = this.parameters.length;
-        this.parameters.forEach(function (param, index) {
+        this.parameters.forEach((param, index) => {
             str += param.name + '=' + param.toString();
             if (index <= length - 2) {
                 str += '&';
