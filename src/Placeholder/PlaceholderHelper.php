@@ -99,8 +99,8 @@ class PlaceholderHelper
                     $repkeys[] = "%7B{$name}%7D";
                     $repkeys[] = "%257B{$name}%257D";
                     $repvalues[] = $value;
-                    $repvalues[] = $value;
-                    $repvalues[] = $value;
+                    $repvalues[] = urlencode($value);
+                    $repvalues[] = urlencode(urlencode($value));
                 } else {
                     $repkeys[] = "{{$name}}";
                     $repkeys[] = "%7B{$name}%7D";

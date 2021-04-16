@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.service-worker').forEach(element => {
+   /* document.querySelectorAll('.service-worker').forEach(element => {
         let file = element.dataset.src;
         navigator.serviceWorker.register(file, {scope: '/'})
             .then(reg => reg.update())
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.data.type === 'fetch') {
             fetchEvent(event);
         }
-    });
+    });*/
     initEventListener();
 });
 
@@ -35,35 +35,79 @@ function initEventListener() {
         element.addEventListener('click', clickEvent);
     });
 }
-
+/*
 function removeEventListener() {
     document.querySelectorAll('[data-event]').forEach(element => {
         element.removeEventListener('click', clickEvent);
     });
 }
-
+*/
 function clickEvent(event) {
     event.preventDefault();
     showOverlay();
-    removeEventListener();
     triggerEvent(JSON.parse(event.currentTarget.dataset.event));
 }
 
-function fetchEvent(event) {
-    let data = event.data.response;
+function fetchEvent(data) {
     data = handleEvent(data);
+    handleAttributes(data);
     inject(data);
     initEventListener();
     hideOverlay();
 }
 
 function triggerEvent(event) {
-    fetch(event.path, {
+    switch (event.type) {
+        case EVENT_TYPE_SUBMIT:
+            return triggerSubmit(event);
+        case EVENT_TYPE_LINK:
+            return triggerLink(event);
+        case EVENT_TYPE_MODAL:
+            return triggerModal(event);
+    }
+
+}
+
+function eventFetch(url, options) {
+    fetch(url, options).then(response => {
+        return response.headers.get('Content-Type') === 'application/json' ? response.json() : response.text()
+    }).then(data => {
+        fetchEvent(data);
+    }).catch(err => console.error(err));
+}
+
+function triggerSubmit(event) {
+    let url = new URL(event.path, document.baseURI);
+    let form = document.getElementById(event.form);
+    let formData = new FormData(form);
+    eventFetch(url.toString(), {
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
             'X-EVENT': JSON.stringify(event)
         },
-    }).catch(err => console.error(err))
+        method: form.method,
+        body: formData
+    });
+}
+
+function triggerModal(event) {
+    let url = new URL(event.path, document.baseURI);
+    eventFetch(url.toString(), {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-EVENT': JSON.stringify(event)
+        },
+    });
+}
+
+function triggerLink(event) {
+    let url = new URL(event.path, document.baseURI);
+    eventFetch(url.toString(), {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-EVENT': JSON.stringify(event)
+        },
+    });
 }
 
 window.addEventListener('popstate', event =>
@@ -71,24 +115,57 @@ window.addEventListener('popstate', event =>
 );
 
 const EVENT_TYPE_LINK = 'link';
+const EVENT_TYPE_MODAL = 'modal';
+const EVENT_TYPE_SUBMIT = 'submit';
 
 function handleEvent(data) {
     if (data && data.event) {
-        switch (data.event.type) {
-            case EVENT_TYPE_LINK:
-                return handleLink(data);
-        }
-
         if (data.event.deleteCache === true) {
             window.caches.delete('pars-helper');
         }
+
+        switch (data.event.type) {
+            case EVENT_TYPE_LINK:
+                return handleLink(data);
+            case EVENT_TYPE_MODAL:
+                return handleModal(data);
+            case EVENT_TYPE_SUBMIT:
+                return handleSubmit(data);
+        }
+    }
+    return data;
+}
+
+function handleSubmit(data)
+{
+    return data;
+}
+
+
+function handleModal(data) {
+    if (data.event.path && data.event.target && data.html) {
+        if (data.event.history === true) {
+            history.replaceState(data, null, data.event.path);
+            history.pushState(data, null, data.event.path);
+        }
+        document.querySelectorAll('#ajax-modal .modal-body').forEach(body => {
+            body.innerHTML = '';
+            body.append(createElementFromHTML(data.html));
+        });
+        $('#ajax-modal').modal({backdrop: 'static', keyboard: false});
+        $('#ajax-modal').on('click.closeModal', '.close-modal', function () {
+            $('#ajax-modal').modal('hide');
+        });
     }
     return data;
 }
 
 function handleLink(data) {
     if (data.event.path && data.event.target && data.html) {
-        history.replaceState(data, null, data.event.path);
+        if (data.event.history === true) {
+            history.replaceState(data, null, data.event.path);
+            history.pushState(data, null, data.event.path);
+        }
         data.inject.html.push({
             mode: 'replace',
             selector: data.event.target,
@@ -102,6 +179,14 @@ function createElementFromHTML(htmlString) {
     const div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     return div.firstChild;
+}
+
+function handleAttributes(data) {
+    if (data && data.attributes) {
+        if (data.attributes.redirect_url) {
+            window.location = data.attributes.redirect_url;
+        }
+    }
 }
 
 function inject(data) {

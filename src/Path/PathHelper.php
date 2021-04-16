@@ -320,6 +320,14 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         return $this->getServerUrlHelper()->generate($this->getPath($reset));
     }
 
+    /**
+     * @return string
+     */
+    public function getBaseUrl(): string
+    {
+        return $this->getServerUrlHelper()->generate($this->getUrlHelper()->getBasePath());
+    }
+
     public function __toString()
     {
         return $this->getPath();
