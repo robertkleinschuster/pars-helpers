@@ -1,16 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('.service-worker').forEach(element => {
-        let file = element.dataset.src;
-        navigator.serviceWorker.register(file, {scope: '/'})
-            .then(reg => reg.update())
-            .catch(error => console.log('SW: ' + error));
-    });
-    navigator.serviceWorker.addEventListener('message', event => {
-        if (event.data.type === 'fetch') {
-            fetchEvent(event);
-        }
-    });
-    initEventListener();
+
 });
 
 function showOverlay() {
