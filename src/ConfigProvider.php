@@ -14,6 +14,9 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'bundles' => [
+                'entrypoints' => [
+                    'helper'
+                ],
                 'list' => [
                     [
                         'type' => 'js-sw',

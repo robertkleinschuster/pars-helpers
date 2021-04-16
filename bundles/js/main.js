@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => initEventListeners());
 
-const events = {
-    "click": clickEvent
-};
+let events = [];
+events.push({
+    type: 'click',
+    callback: clickEvent,
+});
 
 function showOverlay() {
     if (document.querySelectorAll('.ajax-overlay').length === 0) {
@@ -23,13 +25,13 @@ function hideOverlay() {
 
 function initEventListeners() {
     document.querySelectorAll('[data-event]').forEach(element =>
-        events.forEach((name, callback) => element.addEventListener(name, callback)));
+        events.forEach((event) => element.addEventListener(event.type, event.callback)));
 }
-
+/**
 function removeEventListeners() {
     document.querySelectorAll('[data-event]').forEach(element =>
         events.forEach((name, callback) => element.removeEventListener(name, callback)));
-}
+}*/
 
 function clickEvent(event) {
     event.preventDefault();
