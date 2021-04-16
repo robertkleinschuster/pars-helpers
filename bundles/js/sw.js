@@ -16,19 +16,15 @@ self.addEventListener('fetch', event => {
             const client = await clients.get(event.clientId);
             const response = fetchWithCache();
             if (client) {
-                response
-                    .then(response => {
-                        if (response.headers.get('Content-Type') === 'application/json') {
-                            return response.json()
-                        } else {
-                            return response.text()
-                        }
-                    }).then(data => {
+                response.then(response =>
+                    response.headers.get('Content-Type') === 'application/json' ?
+                        response.json() :
+                        response.text())
+                    .then(data =>
                         client.postMessage({
                             type: 'fetch',
                             response: data
-                        });
-                    });
+                        }))
             }
         }
     }());

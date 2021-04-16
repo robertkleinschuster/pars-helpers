@@ -15,8 +15,7 @@ class ElementHelper {
      *
      * @param element
      */
-    constructor(element)
-    {
+    constructor(element) {
         if (typeof element === 'string' || element instanceof String) {
             this._element = document.querySelector(element);
         } else if (typeof element === 'object') {
@@ -28,8 +27,7 @@ class ElementHelper {
      *
      * @param callback
      */
-    ready(callback)
-    {
+    ready(callback) {
         return this.on('DOMContentLoaded', callback);
     }
 
@@ -38,8 +36,7 @@ class ElementHelper {
      * @param selector
      * @return {*}
      */
-    find(selector)
-    {
+    find(selector) {
         let elem = this.element.querySelector(selector);
         if (elem) {
             return new ElementHelper(elem);
@@ -52,8 +49,7 @@ class ElementHelper {
      * @param cssClass
      * @return {boolean}
      */
-    hasClass(cssClass)
-    {
+    hasClass(cssClass) {
         return this.element.classList.contains(cssClass);
     }
 
@@ -62,8 +58,7 @@ class ElementHelper {
      * @param attribute
      * @return {*}
      */
-    hasAttribute(attribute)
-    {
+    hasAttribute(attribute) {
         return this.element.hasAttribute(attribute);
     }
 
@@ -72,8 +67,7 @@ class ElementHelper {
      * @param attribute
      * @return {*}
      */
-    getAttribute(attribute)
-    {
+    getAttribute(attribute) {
         return this.element.getAttribute(attribute);
     }
 
@@ -84,8 +78,7 @@ class ElementHelper {
      * @param value
      * @return {*}
      */
-    setAttribute(attribute, value)
-    {
+    setAttribute(attribute, value) {
         return this.element.setAttribute(attribute, value);
     }
 
@@ -95,8 +88,7 @@ class ElementHelper {
      * @param cssClass
      * @return {ElementHelper}
      */
-    removeClass(cssClass)
-    {
+    removeClass(cssClass) {
         this.element.classList.remove(cssClass);
         return this;
     }
@@ -106,8 +98,7 @@ class ElementHelper {
      * @param cssClass
      * @return {ElementHelper}
      */
-    addClass(cssClass)
-    {
+    addClass(cssClass) {
         this.element.classList.add(cssClass);
         return this;
     }
@@ -119,8 +110,7 @@ class ElementHelper {
      * @param callback
      * @param once
      */
-    on(event, callbackOrSelector, callback = null, once = false)
-    {
+    on(event, callbackOrSelector, callback = null, once = false) {
         if (!Array.isArray(ElementHelper.listener[event])) {
             ElementHelper.listener[event] = [];
         }
@@ -128,7 +118,7 @@ class ElementHelper {
             let length = ElementHelper.listener[event].length;
             ElementHelper.listener[event][length] = callback;
             let e = event.split('.')[0];
-            this.element.addEventListener(e, function (a) {
+            this.element.addEventListener(e, a => {
                 let closest = a.target.closest(callbackOrSelector);
                 if (closest && !a.suppress) {
                     let b = new a.constructor(a.type, a);
@@ -151,8 +141,7 @@ class ElementHelper {
      * @param callback
      * @return {ElementHelper}
      */
-    once(event, callbackOrSelector, callback = null)
-    {
+    once(event, callbackOrSelector, callback = null) {
         return this.on(event, callbackOrSelector, callback, true);
     }
 
@@ -160,13 +149,12 @@ class ElementHelper {
      *
      * @param event
      */
-    off(event)
-    {
+    off(event) {
         if (Array.isArray(ElementHelper.listener[event])) {
             let that = this;
             let e = event.split('.')[0];
-            ElementHelper.listener[event].forEach(function (callback) {
-                that.element.removeEventListener(e, callback);
+            ElementHelper.listener[event].forEach(cb => {
+                that.element.removeEventListener(e, cb);
             });
             ElementHelper.listener[event] = [];
         }
@@ -176,8 +164,7 @@ class ElementHelper {
      *
      * @return {*}
      */
-    get element()
-    {
+    get element() {
         return this._element;
     }
 }
@@ -186,7 +173,6 @@ class ElementHelper {
  *
  * @type {function(*=): ElementHelper}
  */
-window.element = element = window.el = el = function (element) {
+window.element = element = window.el = el = element => {
     return new ElementHelper(element);
 }
-

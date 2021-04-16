@@ -1,11 +1,9 @@
-document.addEventListener("DOMContentLoaded", function (event) {
-    document.querySelectorAll('.service-worker').forEach(function (element) {
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.service-worker').forEach(element => {
         let file = element.dataset.src;
-        navigator.serviceWorker.register(file, {scope: '/'}).then(function (reg) {
-            reg.update();
-        }).catch(function (error) {
-            console.log('SW: ' + error);
-        });
+        navigator.serviceWorker.register(file, {scope: '/'})
+            .then(reg => reg.update())
+            .catch(error => console.log('SW: ' + error));
     });
     navigator.serviceWorker.addEventListener('message', event => {
         if (event.data.type === 'fetch') {
@@ -15,73 +13,66 @@ document.addEventListener("DOMContentLoaded", function (event) {
     initEventListener();
 });
 
-function showOverlay()
-{
+function showOverlay() {
     if (document.querySelectorAll('.ajax-overlay').length === 0) {
-        document.querySelectorAll('body').forEach(function (element) {
-            let html = '<div class="overlay text-center ajax-overlay"><div style="width: 7rem; height: 7rem;" class="spinner-grow text-light shadow-lg" role="status">\n' +
-                '  <span class="sr-only">Loading...</span>\n' +
-                '</div></div>';
-            element.append(createElementFromHTML(html));
-        });
+        const body = document.body;
+        if (!body) return;
+        let html = '<div class="overlay text-center ajax-overlay">' +
+            '<div style="width: 7rem; height: 7rem;" class="spinner-grow text-light shadow-lg" role="status">\n' +
+            '  <span class="sr-only">Loading...</span>\n' +
+            '</div></div>';
+        body.append(createElementFromHTML(html));
     }
     document.querySelectorAll('.ajax-overlay').forEach(element => element.classList.add('show'));
 }
 
-function hideOveralay()
-{
+function hideOverlay() {
     document.querySelectorAll('.ajax-overlay').forEach(element => element.classList.remove('show'));
 }
 
-function initEventListener()
-{
+function initEventListener() {
     document.querySelectorAll('[data-event]').forEach(element => {
         element.addEventListener('click', clickEvent);
     });
 }
 
-function removeEventListener()
-{
+function removeEventListener() {
     document.querySelectorAll('[data-event]').forEach(element => {
         element.removeEventListener('click', clickEvent);
     });
 }
 
-function clickEvent(event)
-{
+function clickEvent(event) {
     event.preventDefault();
     showOverlay();
     removeEventListener();
     triggerEvent(JSON.parse(event.currentTarget.dataset.event));
 }
 
-function fetchEvent(event)
-{
+function fetchEvent(event) {
     let data = event.data.response;
     data = handleEvent(data);
     inject(data);
     initEventListener();
-    hideOveralay();
+    hideOverlay();
 }
 
-function triggerEvent(event)
-{
+function triggerEvent(event) {
     fetch(event.path, {
         headers: {
             'X-Requested-With': 'XMLHttpRequest',
             'X-EVENT': JSON.stringify(event)
         },
-    });
+    }).catch(err => console.error(err))
 }
 
-window.addEventListener('popstate', (event) => {
-    triggerEvent(event.data.event);
-});
+window.addEventListener('popstate', event =>
+    triggerEvent(event.data.event)
+);
 
 const EVENT_TYPE_LINK = 'link';
 
-function handleEvent(data)
-{
+function handleEvent(data) {
     if (data && data.event) {
         switch (data.event.type) {
             case EVENT_TYPE_LINK:
@@ -95,8 +86,7 @@ function handleEvent(data)
     return data;
 }
 
-function handleLink(data)
-{
+function handleLink(data) {
     if (data.event.path && data.event.target && data.html) {
         history.replaceState(data, null, data.event.path);
         data.inject.html.push({
@@ -109,16 +99,15 @@ function handleLink(data)
 }
 
 function createElementFromHTML(htmlString) {
-    var div = document.createElement('div');
+    const div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     return div.firstChild;
 }
 
-function inject(data)
-{
+function inject(data) {
     if (data && data.inject) {
         if (data.inject.html) {
-            data.inject.html.forEach(function (html) {
+            data.inject.html.forEach(html => {
                 switch (html.mode) {
                     case 'replace':
                         document.querySelectorAll(html.selector).forEach(element => {
@@ -139,7 +128,7 @@ function inject(data)
             })
         }
         if (data.inject.script) {
-            data.inject.script.forEach(function (script) {
+            data.inject.script.forEach(script => {
                 if (!script.unique || document.querySelectorAll('script[src=' + script.script + ']').length === 0) {
                     document.querySelectorAll('body').forEach(element => element.append(createElementFromHTML('<script src="' + script.script + '"></script>')));
                 }
