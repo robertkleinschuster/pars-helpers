@@ -341,4 +341,14 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         return clone $this;
     }
 
+    public function __clone()
+    {
+        if (isset($this->routeParameter)) {
+            $this->routeParameter = clone $this->routeParameter;
+        }
+        $this->urlHelper = clone $this->urlHelper;
+        $this->serverUrlHelper = clone $this->serverUrlHelper;
+    }
+
+
 }
