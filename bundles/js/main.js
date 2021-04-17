@@ -20,11 +20,20 @@ function hideOverlay() {
 function initEventListeners() {
     document.querySelectorAll('[data-event]').forEach(element => {
             let serverEvent = JSON.parse(element.dataset.event);
+            let delegateMatch = false;
+            element.querySelectorAll(serverEvent.delegate).forEach((element) => {
+                    element.addEventListener(serverEvent.trigger, event => {
+                        delegateMatch = true
+                    }, {once: true});
+                }
+            );
             element.addEventListener(serverEvent.trigger, event => {
                 event.preventDefault();
-                showOverlay();
-                triggerEvent(serverEvent);
-            });
+                if ((!serverEvent.delegate || delegateMatch) && cooldown()) {
+                    showOverlay();
+                    triggerEvent(serverEvent);
+                }
+            }, {once: true});
         }
     );
 }
@@ -50,11 +59,24 @@ function triggerEvent(event) {
     }
 }
 
+let cool = true;
+
+function cooldown() {
+    if (cool) {
+        setTimeout(() => cool = true, 1000);
+        cool = false;
+        return true;
+    }
+    return false;
+}
+
 function eventFetch(url, options) {
     fetch(url, options)
         .then(response => response.headers.get('Content-Type') === 'application/json' ? response.json() : response.text())
         .then(data => fetchEvent(data))
         .catch(err => console.error(err))
+
+
 }
 
 function triggerSubmit(event) {
