@@ -35,8 +35,8 @@ function initEventListeners() {
                 }
             );
             element.addEventListener(serverEvent.trigger, event => {
-                event.preventDefault();
                 if ((!serverEvent.delegate || delegateMatch) && !busy) {
+                    event.preventDefault();
                     busy = true;
                     showOverlay();
                     triggerEvent(serverEvent);

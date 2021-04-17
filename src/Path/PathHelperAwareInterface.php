@@ -13,7 +13,7 @@ interface PathHelperAwareInterface
     /**
      * @return PathHelper
      */
-    public function getPathHelper(): PathHelper;
+    public function getPathHelper(bool $reset = true): PathHelper;
 
     /**
      * @param PathHelper $pathHelper
