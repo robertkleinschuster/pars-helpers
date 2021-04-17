@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => initEventListeners());
 
-let events = [];
-events.push({
-    type: 'click',
-    callback: clickEvent,
-});
-
 function showOverlay() {
     if (document.querySelectorAll('.ajax-overlay').length === 0) {
         const body = document.body;
@@ -24,20 +18,17 @@ function hideOverlay() {
 }
 
 function initEventListeners() {
-    document.querySelectorAll('[data-event]').forEach(element =>
-        events.forEach((event) => element.addEventListener(event.type, event.callback)));
+    document.querySelectorAll('[data-event]').forEach(element => {
+            let serverEvent = JSON.parse(element.dataset.event);
+            element.addEventListener(serverEvent.trigger, event => {
+                event.preventDefault();
+                showOverlay();
+                triggerEvent(serverEvent);
+            });
+        }
+    );
 }
-/**
-function removeEventListeners() {
-    document.querySelectorAll('[data-event]').forEach(element =>
-        events.forEach((name, callback) => element.removeEventListener(name, callback)));
-}*/
 
-function clickEvent(event) {
-    event.preventDefault();
-    showOverlay();
-    triggerEvent(JSON.parse(event.currentTarget.dataset.event));
-}
 
 function fetchEvent(data) {
     data = handleEvent(data);
@@ -51,6 +42,7 @@ function triggerEvent(event) {
     switch (event.type) {
         case EVENT_TYPE_SUBMIT:
             return triggerSubmit(event);
+        case EVENT_TYPE_CALLBACK:
         case EVENT_TYPE_LINK:
             return triggerLink(event);
         case EVENT_TYPE_MODAL:
@@ -99,13 +91,17 @@ function triggerLink(event) {
     });
 }
 
-window.addEventListener('popstate', event =>
-    triggerEvent(event.data.event)
+window.addEventListener('popstate', event => {
+        if (event.data.event) {
+            triggerEvent(event.data.event);
+        }
+    }
 );
 
 const EVENT_TYPE_LINK = 'link';
 const EVENT_TYPE_MODAL = 'modal';
 const EVENT_TYPE_SUBMIT = 'submit';
+const EVENT_TYPE_CALLBACK = 'callback';
 
 function handleEvent(data) {
     if (data && data.event) {
@@ -114,18 +110,32 @@ function handleEvent(data) {
         }
 
         switch (data.event.type) {
+            case EVENT_TYPE_MODAL:
             case EVENT_TYPE_LINK:
                 return handleLink(data);
             case EVENT_TYPE_MODAL:
                 return handleModal(data);
             case EVENT_TYPE_SUBMIT:
                 return handleSubmit(data);
+            case EVENT_TYPE_CALLBACK:
+                return handleCallback(data);
         }
     }
     return data;
 }
 
 function handleSubmit(data) {
+    return data;
+}
+
+function handleCallback(data) {
+    if (data.event.path && data.event.target && data.html) {
+        data.inject.html.push({
+            mode: 'replace',
+            selector: data.event.target,
+            html: data.html
+        })
+    }
     return data;
 }
 
@@ -140,10 +150,7 @@ function handleModal(data) {
             body.innerHTML = '';
             body.append(createElementFromHTML(data.html));
         });
-        $('#ajax-modal').modal({backdrop: 'static', keyboard: false});
-        $('#ajax-modal').on('click.closeModal', '.close-modal', function () {
-            $('#ajax-modal').modal('hide');
-        });
+        // todo open modal
     }
     return data;
 }
