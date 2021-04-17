@@ -6,7 +6,6 @@ namespace Pars\Helper\Path;
 
 use Mezzio\Helper\ServerUrlHelper;
 use Mezzio\Helper\UrlHelper;
-use Pars\Helper\Parameter\ContextParameter;
 use Pars\Helper\Parameter\FilterParameter;
 use Pars\Helper\Parameter\IdParameter;
 use Pars\Helper\Parameter\OrderParameter;

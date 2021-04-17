@@ -13,6 +13,9 @@ function showOverlay() {
     document.querySelectorAll('.ajax-overlay').forEach(element => element.classList.add('show'));
 }
 
+let busy = false;
+
+
 function hideOverlay() {
     document.querySelectorAll('.ajax-overlay').forEach(element => element.classList.remove('show'));
 }
@@ -23,15 +26,22 @@ function initEventListeners() {
             let delegateMatch = false;
             element.querySelectorAll(serverEvent.delegate).forEach((element) => {
                     element.addEventListener(serverEvent.trigger, event => {
-                        delegateMatch = true
+                        if (!busy) {
+                            delegateMatch = true
+                        } else {
+                            initEventListeners();
+                        }
                     }, {once: true});
                 }
             );
             element.addEventListener(serverEvent.trigger, event => {
                 event.preventDefault();
-                if ((!serverEvent.delegate || delegateMatch) && cooldown()) {
+                if ((!serverEvent.delegate || delegateMatch) && !busy) {
+                    busy = true;
                     showOverlay();
                     triggerEvent(serverEvent);
+                } else {
+                    initEventListeners();
                 }
             }, {once: true});
         }
@@ -45,6 +55,7 @@ function fetchEvent(data) {
     inject(data);
     initEventListeners();
     hideOverlay();
+    busy = false;
 }
 
 function triggerEvent(event) {
@@ -59,16 +70,6 @@ function triggerEvent(event) {
     }
 }
 
-let cool = true;
-
-function cooldown() {
-    if (cool) {
-        setTimeout(() => cool = true, 1000);
-        cool = false;
-        return true;
-    }
-    return false;
-}
 
 function eventFetch(url, options) {
     fetch(url, options)
