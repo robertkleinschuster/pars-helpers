@@ -13,13 +13,17 @@ class DebugHelper
      * @var string|null
      */
     protected static ?string $debug = null;
-
+    protected static array $debugList = [];
     /**
      * @param $obj
      * @param int $level
      */
     public static function trace($obj, int $level = 15)
     {
+        self::$debugList[] = [
+            'object' => $obj,
+            'trace' => debug_backtrace(null, $level)
+        ];
         $debug = self::getBacktrace($level);
         $debug .= '<pre><br><br>--------------DUMP--------------<br><br>';
         if (is_scalar($obj)) {
@@ -71,4 +75,14 @@ class DebugHelper
     {
         return isset(self::$debug);
     }
+
+    /**
+     * @return array
+     */
+    public static function getDebugList(): array
+    {
+        return self::$debugList;
+    }
+
+
 }
