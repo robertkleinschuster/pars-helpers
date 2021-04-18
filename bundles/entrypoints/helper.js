@@ -1,6 +1,6 @@
-import {EventHelper} from "../js/EventHelper";
+import {ServerEventHelper} from "../js/ServerEventHelper/EventHelper";
+window.eventHelper = new ServerEventHelper(document);
 
 document.addEventListener("DOMContentLoaded", () => {
-    const eventHelper = new EventHelper(document);
-    eventHelper.init();
+    window.eventHelper.init();
 });

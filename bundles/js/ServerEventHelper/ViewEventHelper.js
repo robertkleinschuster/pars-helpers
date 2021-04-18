@@ -1,29 +1,34 @@
-import {OverlayHelper} from "./OverlayHelper";
-import {HtmlHelper} from "./HtmlHelper";
+import {OverlayHelper} from "../OverlayHelper";
+import {HtmlHelper} from "../HtmlHelper";
+import {ViewEvent} from "./ServerEvent";
 
-const EVENT_TYPE_LINK = 'link';
-const EVENT_TYPE_MODAL = 'modal';
-const EVENT_TYPE_SUBMIT = 'submit';
-const EVENT_TYPE_CALLBACK = 'callback';
+export class ViewEventHelper {
 
-export class EventHelper {
+    #_initialized = false;
+
     constructor(root) {
         this.overlay = new OverlayHelper();
         this.root = root;
     }
 
     init() {
-        this.root.querySelectorAll('[data-event]').forEach(this.attatchEvents.bind(this));
+        this.#_initialized = true;
+        this.root.querySelectorAll('[data-event]').forEach(this.#attatchEvents.bind(this));
     }
 
-    attatchEvents(element) {
+
+    get isInitialized() {
+        return this.#_initialized;
+    }
+
+    #attatchEvents(element) {
         if (element && element.matches('[data-event]')) {
             let serverEvent = JSON.parse(element.dataset.event);
             console.debug('Attatched event: ', serverEvent);
             this.triggerListener = (event) => {
                 if (serverEvent.delegate === null || event.target.closest(serverEvent.delegate)) {
                     event.preventDefault();
-                    this.triggerEvent(serverEvent);
+                    this.#triggerEvent(serverEvent);
                 }
             }
             element.removeEventListener(serverEvent.trigger, this.triggerListener);
@@ -31,24 +36,25 @@ export class EventHelper {
         }
     }
 
-    triggerEvent(event) {
+    #triggerEvent(event) {
         console.debug('Triggered event: ', event)
         switch (event.type) {
-            case EVENT_TYPE_SUBMIT:
-                return this.triggerSubmit(event);
-            case EVENT_TYPE_CALLBACK:
-            case EVENT_TYPE_LINK:
-                return this.triggerLink(event);
-            case EVENT_TYPE_MODAL:
-                return this.triggerModal(event);
+            case ViewEvent.TYPE_SUBMIT:
+                return this.#triggerSubmit(event);
+            case ViewEvent.TYPE_CALLBACK:
+                return this.#triggerCallback(event);
+            case ViewEvent.TYPE_LINK:
+                return this.#triggerLink(event);
+            case ViewEvent.TYPE_MODAL:
+                return this.#triggerModal(event);
         }
     }
 
-    triggerSubmit(event) {
+    #triggerSubmit(event) {
         let url = new URL(event.path, document.baseURI);
         let form = document.getElementById(event.form);
         let formData = new FormData(form);
-        this.fetchEvent(url.toString(), {
+        this.#fetchEvent(url.toString(), {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-EVENT': JSON.stringify(event)
@@ -58,9 +64,9 @@ export class EventHelper {
         });
     }
 
-    triggerModal(event) {
+    #triggerModal(event) {
         let url = new URL(event.path, document.baseURI);
-        this.fetchEvent(url.toString(), {
+        this.#fetchEvent(url.toString(), {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-EVENT': JSON.stringify(event)
@@ -68,9 +74,9 @@ export class EventHelper {
         });
     }
 
-    triggerLink(event) {
+    #triggerLink(event) {
         let url = new URL(event.path, document.baseURI);
-        this.fetchEvent(url.toString(), {
+        this.#fetchEvent(url.toString(), {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'X-EVENT': JSON.stringify(event)
@@ -78,15 +84,19 @@ export class EventHelper {
         });
     }
 
-    fetchEvent(url, options) {
+    #triggerCallback(event) {
+        this.#triggerLink(event);
+    }
+
+    #fetchEvent(url, options) {
         if (!this.overlay.isVisible()) {
             this.overlay.show();
             fetch(url, options)
                 .then(response => response.headers.get('Content-Type') === 'application/json' ? response.json() : response.text())
                 .then(data => {
-                    this.handleEvent(data)
-                    this.inject(data);
-                    this.handleAttributes(data);
+                    this.#handleEvent(data)
+                    this.#inject(data);
+                    this.#handleAttributes(data);
                     this.overlay.hide();
                 })
                 .catch(err => console.error(err))
@@ -94,31 +104,30 @@ export class EventHelper {
     }
 
 
-    handleEvent(data) {
+    #handleEvent(data) {
         if (data && data.event) {
             if (data.event.deleteCache === true) {
                 window.caches.delete('pars-helper');
             }
             switch (data.event.type) {
-                case EVENT_TYPE_MODAL:
-                case EVENT_TYPE_LINK:
-                    return this.handleLink(data);
-                case EVENT_TYPE_MODAL:
-                    return this.handleModal(data);
-                case EVENT_TYPE_SUBMIT:
-                    return this.handleSubmit(data);
-                case EVENT_TYPE_CALLBACK:
-                    return this.handleCallback(data);
+                case ViewEvent.TYPE_LINK:
+                    return this.#handleLink(data);
+                case ViewEvent.TYPE_MODAL:
+                    return this.#handleModal(data);
+                case ViewEvent.TYPE_SUBMIT:
+                    return this.#handleSubmit(data);
+                case ViewEvent.TYPE_CALLBACK:
+                    return this.#handleCallback(data);
             }
         }
         return data;
     }
 
-    handleSubmit(data) {
+    #handleSubmit(data) {
         return data;
     }
 
-    handleCallback(data) {
+    #handleCallback(data) {
         if (data.event.path && data.event.target && data.html) {
             data.inject.html.push({
                 mode: 'replace',
@@ -130,7 +139,8 @@ export class EventHelper {
     }
 
 
-    handleModal(data) {
+    #handleModal(data) {
+        return this.#handleLink(data);
         if (data.event.path && data.event.target && data.html) {
             if (data.event.history === true) {
                 history.replaceState(data, null, data.event.path);
@@ -145,7 +155,7 @@ export class EventHelper {
         return data;
     }
 
-    handleLink(data) {
+    #handleLink(data) {
         if (data.event.path && data.event.target && data.html) {
             if (data.event.history === true) {
                 history.replaceState(data, null, data.event.path);
@@ -160,7 +170,7 @@ export class EventHelper {
         return data;
     }
 
-    handleAttributes(data) {
+    #handleAttributes(data) {
         if (data && data.attributes) {
             if (data.attributes.redirect_url) {
                 window.location = data.attributes.redirect_url;
@@ -168,7 +178,7 @@ export class EventHelper {
         }
     }
 
-    inject(data) {
+    #inject(data) {
         if (data && data.inject) {
             if (data.inject.html) {
                 data.inject.html.forEach(html => {
@@ -186,10 +196,10 @@ export class EventHelper {
                                 break;
                         }
                         if (newElement.matches('[data-event]')) {
-                            this.attatchEvents(newElement);
+                            this.#attatchEvents(newElement);
                         }
                         newElement.querySelectorAll('[data-event]').forEach(newSubElement => {
-                                this.attatchEvents(newSubElement);
+                                this.#attatchEvents(newSubElement);
                             }
                         );
                     });

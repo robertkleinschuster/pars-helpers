@@ -14,7 +14,7 @@ class ConfigProvider
         return [
             'dependencies' => $this->getDependencies(),
             'bundles' => [
-                'entrypoints' => [
+              /*  'entrypoints' => [
                     'helper'
                 ],
                 'list' => [
@@ -35,7 +35,7 @@ class ConfigProvider
                             __DIR__ . '/../bundles/js/path.js',
                         ]
                     ]
-                ]
+                ]*/
             ]
         ];
     }
