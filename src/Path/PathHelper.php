@@ -343,8 +343,15 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
 
     public function __clone()
     {
-        if (isset($this->routeParameter)) {
+        if ($this->hasRouteParameter()) {
             $this->routeParameter = clone $this->routeParameter;
+        }
+        if ($this->hasParameterList()) {
+            $parameterList = new ParameterList();
+            foreach ($this->getParameterList() as $item) {
+                $parameterList->set($item);
+            }
+            $this->parameterList = $parameterList;
         }
         $this->urlHelper = clone $this->urlHelper;
         $this->serverUrlHelper = clone $this->serverUrlHelper;
