@@ -349,7 +349,7 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         if ($this->hasParameterList()) {
             $parameterList = new ParameterList();
             foreach ($this->getParameterList() as $item) {
-                $parameterList->set($item);
+                $parameterList->set(clone $item);
             }
             $this->parameterList = $parameterList;
         }
