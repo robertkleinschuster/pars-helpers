@@ -14,6 +14,7 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
 
     public const ATTRIBUTE_ACTION = 'action';
     public const ATTRIBUTE_CONTROLLER = 'controller';
+    public const ATTRIBUTE_HASH = 'hash';
 
     /**
      * @var ParameterMapHelper
@@ -178,5 +179,33 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
             $this->unsetAttribute($key);
         }
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasHash(): bool
+    {
+        return $this->hasAttribute(self::ATTRIBUTE_HASH);
+    }
+
+    /**
+     * @return string
+     * @throws AttributeNotFoundException
+     */
+    public function getHash(): string
+    {
+        return $this->getAttribute(self::ATTRIBUTE_HASH);
+    }
+
+    /**
+     * @param string $hash
+     * @return $this
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public function setHash(string $hash): self
+    {
+        return $this->setAttribute(self::ATTRIBUTE_HASH, $hash);
     }
 }

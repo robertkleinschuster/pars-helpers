@@ -4,6 +4,7 @@
 namespace Pars\Helper\String;
 
 
+use Cocur\Slugify\Slugify;
 use Pars\Helper\Placeholder\PlaceholderHelper;
 
 /**
@@ -81,7 +82,6 @@ class StringHelper
 
         return $result;
     }
-
 
     public static function encodeHtml(string $html): string
     {
@@ -173,5 +173,14 @@ class StringHelper
             'address',
             'blockquote',
         ];
+    }
+
+    /**
+     * @param string $string
+     * @return string
+     */
+    public static function slugify(string $string): string
+    {
+        return (new Slugify())->slugify($string);
     }
 }

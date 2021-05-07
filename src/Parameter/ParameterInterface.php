@@ -2,6 +2,10 @@
 
 namespace Pars\Helper\Parameter;
 
+use Pars\Pattern\Exception\AttributeExistsException;
+use Pars\Pattern\Exception\AttributeLockException;
+use Pars\Pattern\Exception\AttributeNotFoundException;
+
 interface ParameterInterface
 {
     /**
@@ -87,5 +91,24 @@ interface ParameterInterface
      * @return $this
      */
     public function clear(): self;
+
+    /**
+     * @return bool
+     */
+    public function hasHash(): bool;
+
+    /**
+     * @return string
+     * @throws AttributeNotFoundException
+     */
+    public function getHash(): string;
+
+    /**
+     * @param string $hash
+     * @return $this
+     * @throws AttributeExistsException
+     * @throws AttributeLockException
+     */
+    public function setHash(string $hash): self;
 
 }

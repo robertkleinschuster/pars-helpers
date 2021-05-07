@@ -42,7 +42,15 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      */
     private ?string $routeName = null;
 
+    /**
+     * @var string|null
+     */
     private ?string $fragment = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $currentPathReal = null;
 
     /**
      * Path constructor.
@@ -355,6 +363,33 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
         }
         $this->urlHelper = clone $this->urlHelper;
         $this->serverUrlHelper = clone $this->serverUrlHelper;
+    }
+
+    /**
+    * @return string
+    */
+    public function getCurrentPathReal(): string
+    {
+        return $this->currentPathReal;
+    }
+
+    /**
+    * @param string $currentPathReal
+    *
+    * @return $this
+    */
+    public function setCurrentPathReal(string $currentPathReal): self
+    {
+        $this->currentPathReal = $currentPathReal;
+        return $this;
+    }
+
+    /**
+    * @return bool
+    */
+    public function hasCurrentPathReal(): bool
+    {
+        return isset($this->currentPathReal);
     }
 
 
