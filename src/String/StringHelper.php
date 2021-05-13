@@ -76,7 +76,7 @@ class StringHelper
         }
 
         $placeholders = PlaceholderHelper::findPlaceholderResolved($result);
-        foreach ($placeholders as $placeholder) {
+        foreach ($placeholders as $placeholder => $placeholderClean) {
             $result = str_replace($placeholder, '', $result);
         }
 
@@ -110,7 +110,7 @@ class StringHelper
         }
 
         $placeholders = PlaceholderHelper::findPlaceholderResolved($result);
-        foreach ($placeholders as $placeholder) {
+        foreach ($placeholders as $placeholder => $placeholderClean) {
             $result = str_replace($placeholder, $encodeTag($placeholder), $result);
         }
 

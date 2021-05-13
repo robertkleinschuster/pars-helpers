@@ -43,10 +43,21 @@ class PlaceholderHelper
         $result = [];
         $placeholders = self::findPlaceholder($str);
         $it = new \RecursiveIteratorIterator(new \RecursiveArrayIterator($placeholders));
-        foreach ($it as $key => $value) {
-            $result[$key] = $value;
+        foreach ($it as $value) {
+            $result[$value] = self::removeDelimiter($value);
         }
         return $result;
+    }
+
+    public static function removeDelimiter(string $placeholder): string
+    {
+        $replace['{'] = '';
+        $replace[urlencode('{')] = '';
+        $replace[urlencode(urlencode('{'))] = '';
+        $replace['}'] = '';
+        $replace[urlencode('}')] = '';
+        $replace[urlencode(urlencode('}'))] = '';
+        return str_replace(array_keys($replace), array_values($replace), $placeholder);
     }
 
     /**
