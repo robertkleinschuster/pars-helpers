@@ -22,7 +22,8 @@ class StringHelper
      */
     public static function startsWith(string $str, string $needle): bool
     {
-        return strpos($str, $needle) === 0;
+        $length = strlen( $needle );
+        return substr( $str, 0, $length ) === $needle;
     }
 
     /**
@@ -47,7 +48,11 @@ class StringHelper
      */
     public static function endsWith(string $str, string $needle): bool
     {
-        return strpos($str, $needle, strlen($needle) - 1) === 0;
+        $length = strlen( $needle );
+        if( !$length ) {
+            return true;
+        }
+        return substr( $str, -$length ) === $needle;
     }
 
     /**
