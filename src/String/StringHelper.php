@@ -5,6 +5,7 @@ namespace Pars\Helper\String;
 
 
 use Cocur\Slugify\Slugify;
+use joshtronic\LoremIpsum;
 use Pars\Helper\Placeholder\PlaceholderHelper;
 
 /**
@@ -187,5 +188,15 @@ class StringHelper
     public static function slugify(string $string): string
     {
         return (new Slugify())->slugify($string);
+    }
+
+    /**
+     * @param int $words
+     * @return string
+     */
+    public static function lipsum(int $words): string
+    {
+        $lipsum = new LoremIpsum();
+        return $lipsum->words($words);
     }
 }
