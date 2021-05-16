@@ -9,15 +9,27 @@ declare(strict_types=1);
 
 namespace ParsTest\Helper\Parameter;
 
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\Uri;
+use Mezzio\Helper\ServerUrlHelper;
+use Mezzio\Helper\UrlHelper;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\Route;
+use Mezzio\Router\RouteResult;
 use Pars\Helper\Parameter\ContextParameter;
+use Pars\Helper\Path\PathHelper;
 use ParsTest\Helper\HelperTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
 /**
  * Class DefaultTestCaseTest
  * @package Pars\Bean
  */
-class ContextParameterTest extends HelperTestCase
+class ContextParameterTest extends \Pars\Pattern\PHPUnit\DefaultTestCase
 {
 
 
@@ -89,5 +101,28 @@ class ContextParameterTest extends HelperTestCase
         $this->assertEquals($expect, $context->resolveContextFromPath($path));
     }
 
+    /**
+     * @return PathHelper
+     */
+    protected function getPathHelper(): PathHelper
+    {
+        $route = new Route('{controller}/{action}', new class() implements MiddlewareInterface {
+            public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+            {
+                return $handler->handle($request);
+            }
+        });
+        $router = new FastRouteRouter();
+        $request = new ServerRequest([], [], new Uri('test/test'));
+        $router->addRoute($route);
+        $router->match($request);
+        $urlHelper = new UrlHelper($router);
+        $result = RouteResult::fromRoute($route);
+        $urlHelper->setRouteResult($result);
+        $path = new PathHelper($urlHelper, new ServerUrlHelper());
+        $path->setController('test');
+        $path->setAction('test');
+        return $path;
+    }
 
 }
