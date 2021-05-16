@@ -18,7 +18,8 @@
     "pars/pars-patterns": "@dev"
   },
   "require-dev": {
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "pars/pars-core": "@dev"
   },
   "autoload": {
     "psr-4": {

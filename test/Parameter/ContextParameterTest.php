@@ -18,7 +18,6 @@ use Mezzio\Router\Route;
 use Mezzio\Router\RouteResult;
 use Pars\Helper\Parameter\ContextParameter;
 use Pars\Helper\Path\PathHelper;
-use ParsTest\Helper\HelperTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
