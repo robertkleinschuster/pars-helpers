@@ -87,4 +87,23 @@ class FilesystemHelper
         chdir($curDir);
         return $dir;
     }
+
+    public static function getDir(string $path, bool $isDir = false)
+    {
+        $dir = $path;
+        if (!$isDir) {
+            $dir = dirname($path);
+        }
+        $realDir = realpath($dir);
+        if (!$realDir) {
+            mkdir($dir);
+            $realDir = realpath($dir);
+        }
+        return $realDir;
+    }
+
+    public static function getPath(string $path)
+    {
+        return static::getDir($path) . DIRECTORY_SEPARATOR . basename($path);
+    }
 }
