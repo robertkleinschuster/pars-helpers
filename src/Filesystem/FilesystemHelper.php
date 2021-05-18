@@ -94,12 +94,6 @@ class FilesystemHelper
         if (!$isDir) {
             $dir = dirname($path);
         }
-        $parent = $dir;
-        while(!realpath($parent)) {
-            if ($parent = self::findExistingParentDir($path) === null) {
-                break;
-            }
-        }
         $realDir = realpath($dir);
         if (!$realDir) {
             mkdir($dir);
