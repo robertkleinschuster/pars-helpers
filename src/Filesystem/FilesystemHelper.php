@@ -94,8 +94,9 @@ class FilesystemHelper
         if (!$isDir) {
             $dir = dirname($path);
         }
-        while(!realpath($dir)) {
-            if (self::findExistingParentDir($path) === null) {
+        $parent = $dir;
+        while(!realpath($parent)) {
+            if ($parent = self::findExistingParentDir($path) === null) {
                 break;
             }
         }
