@@ -106,4 +106,20 @@ class FilesystemHelper
     {
         return static::getDir($path) . DIRECTORY_SEPARATOR . basename($path);
     }
+
+    /**
+     * @param $folder
+     * @param $perm
+     */
+    public static function chmodRec($folder, $perm)
+    {
+        $result = chmod("$folder", $perm);
+        $glob = glob("$folder/*");
+        if (is_array($glob)) {
+            foreach ($glob as $item) {
+                self::chmodRec($item, $perm);
+            }
+        }
+        return $result;
+    }
 }
