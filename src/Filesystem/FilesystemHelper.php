@@ -94,10 +94,27 @@ class FilesystemHelper
         if (!$isDir) {
             $dir = dirname($path);
         }
+        while(!realpath($dir)) {
+            if (self::findExistingParentDir($path) === null) {
+                break;
+            }
+        }
         $realDir = realpath($dir);
         if (!$realDir) {
             mkdir($dir);
             $realDir = realpath($dir);
+        }
+        return $realDir;
+    }
+
+    public static function findExistingParentDir($path)
+    {
+        $realDir = null;
+        if ($path) {
+            $realDir = realpath($path);
+            if (!$realDir) {
+                $realDir = self::findExistingParentDir(dirname($path));
+            }
         }
         return $realDir;
     }
