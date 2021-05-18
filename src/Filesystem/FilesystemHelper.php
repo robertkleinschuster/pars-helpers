@@ -94,10 +94,10 @@ class FilesystemHelper
         if (!$isDir) {
             $dir = dirname($path);
         }
-        $realDir = realpath($dir);
+        $realDir = @realpath($dir);
         if (!$realDir) {
-            mkdir($dir);
-            $realDir = realpath($dir);
+            @mkdir($dir);
+            $realDir = @realpath($dir);
         }
         return $realDir;
     }
