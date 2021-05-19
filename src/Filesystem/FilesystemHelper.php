@@ -20,7 +20,6 @@ class FilesystemHelper
                 unlink($dir . DIRECTORY_SEPARATOR . $file);
             }
         }
-        return rmdir($dir);
     }
 
     public static function injectHash(string $filename, string $hash): string
@@ -88,22 +87,22 @@ class FilesystemHelper
         return $dir;
     }
 
-    public static function getDir(string $path, bool $isDir = false)
+    public static function createDirectory(string $path, bool $isDir = false)
     {
         $dir = $path;
         if (!$isDir) {
             $dir = dirname($path);
         }
-        if (!@is_dir($dir)) {
-            @mkdir($dir);
+        if (!is_dir($dir)) {
+            mkdir($dir);
         }
         return $dir;
     }
 
 
-    public static function getPath(string $path)
+    public static function createPath(string $path)
     {
-        return static::getDir($path) . DIRECTORY_SEPARATOR . basename($path);
+        return static::createDirectory($path) . DIRECTORY_SEPARATOR . basename($path);
     }
 
     /**
