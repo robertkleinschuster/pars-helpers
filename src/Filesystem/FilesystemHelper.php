@@ -5,6 +5,7 @@ namespace Pars\Helper\Filesystem;
 
 
 use Pars\Pattern\Exception\CoreException;
+use Symfony\Component\Filesystem\Filesystem;
 
 class FilesystemHelper
 {
