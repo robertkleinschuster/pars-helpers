@@ -5,7 +5,6 @@ namespace Pars\Helper\Filesystem;
 
 
 use Pars\Pattern\Exception\CoreException;
-use Symfony\Component\Filesystem\Filesystem;
 
 class FilesystemHelper
 {
@@ -13,12 +12,16 @@ class FilesystemHelper
 
     public static function deleteDirectory(string $dir)
     {
-        $files = array_diff(scandir($dir), array('.', '..'));
-        foreach ($files as $file) {
-            if (is_dir($dir . DIRECTORY_SEPARATOR . $file)) {
-                self::deleteDirectory($dir . DIRECTORY_SEPARATOR . $file);
-            } else {
-                unlink($dir . DIRECTORY_SEPARATOR . $file);
+        if (is_dir($dir)) {
+            $files = array_diff(scandir($dir), array('.', '..'));
+            foreach ($files as $file) {
+                if (is_dir($dir . DIRECTORY_SEPARATOR . $file)) {
+                    self::deleteDirectory($dir . DIRECTORY_SEPARATOR . $file);
+                } else {
+                    if (!in_array($file, ['.gitkeep', '.gitignore'])) {
+                        unlink($dir . DIRECTORY_SEPARATOR . $file);
+                    }
+                }
             }
         }
     }

@@ -14,6 +14,7 @@ class DebugHelper
      */
     protected static ?string $debug = null;
     protected static array $debugList = [];
+
     /**
      * @param $obj
      * @param int $level
@@ -40,11 +41,11 @@ class DebugHelper
         self::$debug .= $debug . '<br>';
     }
 
-    public static function getBacktrace(int $level = 15, array $ignoreFunctions = [], array $ignoreClasses = []): string
+    public static function getBacktrace(int $level = 15, array $ignoreFunctions = [], array $ignoreClasses = [], bool $html = true): string
     {
         $trace = debug_backtrace(null, 20);
         foreach ($trace as $key => $item) {
-            if (isset($item['class']) && in_array($item['class'],  $ignoreClasses)) {
+            if (isset($item['class']) && in_array($item['class'], $ignoreClasses)) {
                 unset($trace[$key]);
             }
             if (in_array($item['function'], array_merge(['trace', 'pars_debug', 'getBacktrace'], $ignoreFunctions))) {
@@ -55,16 +56,25 @@ class DebugHelper
         $item = reset($trace);
 
         $class = $item['class'] ?? null;
-        $function =  $item['function'] ?? '';
-        $line =  $item['line'] ?? '';
-        $debug = '<pre style="font-size: 14px; font-weight: bolder">DEBUG: ' . $class . ':' .$function . ':' . $line . '</pre>';
-        $debug .= '<pre style="font-size: 13px">';
-        $debug .= '<br>--------------TRACE--------------<br>';
+        $function = $item['function'] ?? '';
+        $line = $item['line'] ?? '';
+        if ($html) {
+            $debug = '<pre style="font-size: 14px; font-weight: bolder">DEBUG: ' . $class . ':' . $function . ':' . $line . '</pre>';
+            $debug .= '<pre style="font-size: 13px">';
+            $debug .= '<br>--------------TRACE--------------<br>';
+        } else {
+            $debug = '';
+        }
         foreach ($trace as $i => $item) {
             $class = $item['class'] ?? null;
-            $debug .= '<br>#' . $i . ' - ' . $class . ':' . $item['function'] ?? '' . ':' . $item['line'] ?? '';
+            if ($html) {
+                $debug .= '<br>#';
+            }
+            $debug .=  $i . ' - ' . $class . ':' . $item['function'] ?? '' . ':' . $item['line'] ?? '';
         }
-        $debug .= '</pre>';
+        if ($html) {
+            $debug .= '</pre>';
+        }
         return $debug;
     }
 
