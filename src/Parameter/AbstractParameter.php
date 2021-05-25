@@ -2,6 +2,7 @@
 
 namespace Pars\Helper\Parameter;
 
+use Pars\Helper\String\StringHelper;
 use Pars\Pattern\Attribute\AttributeAwareInterface;
 use Pars\Pattern\Attribute\AttributeAwareTrait;
 use Pars\Pattern\Exception\AttributeExistsException;
@@ -195,7 +196,7 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
      */
     public function getHash(): string
     {
-        return $this->getAttribute(self::ATTRIBUTE_HASH);
+        return StringHelper::slugify($this->getAttribute(self::ATTRIBUTE_HASH));
     }
 
     /**

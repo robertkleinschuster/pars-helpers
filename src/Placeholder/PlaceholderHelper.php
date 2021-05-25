@@ -90,7 +90,7 @@ class PlaceholderHelper
                 $name = str_replace('%7D', '', $name);
                 $name = str_replace('%257B', '', $name);
                 $name = str_replace('%257D', '', $name);
-                if ($bean->exists($name)) {
+                if ($bean->exists($name) && $bean->isset($name)) {
                     $value = $bean->get($name);
                 } else {
                     $data = $this->unnormalizeArray($bean->toArray(true));

@@ -52,10 +52,6 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
      */
     private ?string $currentPathReal = null;
 
-    /**
-     * @var string|null
-     */
-    protected ?string $hash = null;
 
     /**
      * Path constructor.
@@ -396,24 +392,5 @@ class PathHelper implements ParameterListAwareInterface, RouteParameterAwareInte
     {
         return isset($this->currentPathReal);
     }
-
-    /**
-     * @return string|null
-     */
-    public function getHash(): ?string
-    {
-        return $this->hash;
-    }
-
-    /**
-     * @param string|null $hash
-     * @return PathHelper
-     */
-    public function setHash(?string $hash): PathHelper
-    {
-        $this->hash = $hash;
-        return $this;
-    }
-
 
 }
