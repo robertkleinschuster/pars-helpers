@@ -209,4 +209,14 @@ abstract class AbstractParameter implements ParameterInterface, AttributeAwareIn
     {
         return $this->setAttribute(self::ATTRIBUTE_HASH, $hash);
     }
+
+    public function removeEmpty()
+    {
+        foreach ($this->getAttribute_Keys() as $attribute) {
+            if (empty($this->getAttribute($attribute))) {
+                $this->unsetAttribute($attribute);
+            }
+        }
+        return $this;
+    }
 }
