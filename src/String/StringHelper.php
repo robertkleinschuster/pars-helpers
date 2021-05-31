@@ -27,6 +27,11 @@ class StringHelper
         return substr( $str, 0, $length ) === $needle;
     }
 
+    public static function contains(string $str, string $needle): bool
+    {
+        return strpos($str, $needle) !== false;
+    }
+
     /**
      * @param string $str
      * @param array $needle_List
